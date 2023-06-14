@@ -1,2 +1,2 @@
 # BookingApp
-Here i will commit about my Booking app project C# Web
+Here I'am going to commit about my Booking app project for SoftUni C# Web Course
