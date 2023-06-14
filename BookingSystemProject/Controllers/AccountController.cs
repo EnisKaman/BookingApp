@@ -63,7 +63,12 @@
             var user = await userManager.FindByNameAsync(loginViewModel.Username);
             if (user != null)
             {
-                return RedirectToAction("Index", "Home");
+                var result = await signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
             }
             ModelState.AddModelError("", "Invalid username or password");
             return View(loginViewModel);
