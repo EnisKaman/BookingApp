@@ -1,0 +1,38 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="~/css/AccountStyles/Register.css" asp-append-version="true" />
+
+<div class="background"></div>
+<div class="container">
+    <section class="content-section">
+        <h2 class="content-title">Welcome to our booking platform!</h2>
+        <p>
+            Thank you for choosing our reservation platform.
+            With our system, you can easily book accommodations such as hotels, apartments, campings, cruises and more.
+            Whether you're traveling for business or leisure, we'll help you find and reserve the perfect place to stay.
+        </p>
+    </section>
+    <form class="register-form" method="post">
+        <h1 class="title">@ViewData["Title"]</h1>
+        <section class="input-container">
+            <label asp-for="@Model.Username">Username</label>
+            <input type="text" class="form-control " autocomplete="username" aria-required="true" placeholder="Enter username..." asp-for="@Model.Username" />
+            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+        </section>
+        <section class="input-container">
+            <label asp-for="@Model.Password">Password</label>
+            <input type="password" class="form-control" autocomplete="password" aria-required="true" placeholder="Enter password" asp-for="@Model.Password" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </section>
+        <button class="submit-btn" type="submit">Login</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
