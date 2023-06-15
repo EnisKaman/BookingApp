@@ -4,44 +4,91 @@
     padding: 0px;
     margin: 0px;
 }
-header{
+header {
     background-color: darkblue;
+    padding: 25px 2.2rem;
 }
 .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.3rem;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.4rem;
 }
 .nav-list li a {
   text-decoration: none;
   color: white;
-  font-size: 1.4rem;
+  font-size: 2.4rem;
   position: relative;
   padding: 0.4rem;
 }
+#logo2{
+    display:none;
+}
+#logo2,
 #logo{
-    font-size: 2rem;
-    font-weight: bold;
+   font-size: 2rem;
+   font-weight: bold;
+   text-decoration:none;
+   color:white;
 }
 .nav-list li a::before {
-    position: absolute;
-    content: "";
-    width: 0%;
-    height: 3px;
-    left: 0;
-    bottom: 0;
-    background-color: white;
-    transition: 0.5s ease;
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  transition: 0.5s ease;
 }
 .nav-list li a:hover::before {
     width: 100%;
-    bottom: -8px;
+    bottom: -4px;
 }
+#menu-btn{
+    font-size:3rem;
+    color:white;
+    margin-left:auto;
+    padding: 1.3rem 0rem 0rem 1.5rem;
+    display:none;
+}
+.drop-down-menu {
+    position: absolute;
+    top: 94px;
+    right: 1rem;
+    color: wheat;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    width: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 2rem;
+    transition: height 0.5s ease;
+}
+.drop-down-menu li a {
+  color: white;
+  padding: 1.2rem;
+  font-size:1.2rem;
+  transition: 0.5s ease;
+}
+.drop-down-menu li a:hover{
+    opacity:0.7;
+}
+.drop-down-menu a:not(:last-of-type) {
+  border-bottom: 1px solid black;
+}
+.not-active{
+   height:0px;
+   display:none;
+}
+

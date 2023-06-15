@@ -3,14 +3,18 @@
     ViewData["Title"] = "Register";
 }
 <link rel="stylesheet" href="~/css/AccountStyles/account.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<div class="container">
+<video src="~/pexels-tom-fisk-3546903-3840x2160-30fps.mp4"
+       muted
+       autoplay
+       loop></video>
+<div class="form-container">
     <section class="content-section">
+        <h1 class="content-logo"><i class="fa-solid fa-plane"></i> Travel</h1>
         <h2 class="content-title">Welcome to our booking platform!</h2>
         <p>
             Thank you for choosing our reservation platform.
-            With our system, you can easily book accommodations such as hotels, apartments, campings, cruises and more.
-            Whether you're traveling for business or leisure, we'll help you find and reserve the perfect place to stay.
         </p>
     </section>
     <form class="register-form" method="post">
@@ -40,7 +44,7 @@
     </form>
 
 </div>
-
+<script src="~/js/account.js"></script>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
