@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\css\responsive-base.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -37,6 +33,10 @@
     <Content Update="wwwroot\pexels-tom-fisk-3546903-3840x2160-30fps.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\Rooms\" />
   </ItemGroup>
 
 </Project>

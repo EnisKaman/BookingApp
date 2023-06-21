@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -11,7 +11,7 @@
     @if (User?.Identity?.IsAuthenticated ?? false)
     {
         <li>
-            <p class="username">@User.Identity.Name</p>
+            <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
         </li>
         <li>
             <a asp-action="Logout" asp-controller="Account">Logout</a>

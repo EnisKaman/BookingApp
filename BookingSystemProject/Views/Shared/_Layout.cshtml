@@ -12,16 +12,16 @@
 </head>
 <body>
     <header>
-         <nav class="navigation">
-        <ul class="nav-list">
-        <li>
-        <a id="logo" asp-area="" asp-controller="Home" asp-action="Index">Travel</a>
-        </li>
-        <li>
-              <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-        </li>
-        </ul>
-           <partial name="_LoginPartial" />
+        <nav class="navigation">
+            <ul class="nav-list">
+                <li>
+                    <a id="logo" asp-area="" asp-controller="Home" asp-action="Index">Travel</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+            </ul>
+            <partial name="_LoginPartial" />
         </nav>
         <a id="logo2" asp-area="" asp-controller="Home" asp-action="Index">Travel</a>
         <i class="fa-solid fa-bars" id="menu-btn"></i>
@@ -34,13 +34,18 @@
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <li>
+                        <a asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+                    </li>
+
+                    <li>
                         <a asp-action="Logout" asp-controller="Account">Logout</a>
                     </li>
+
                 }
                 else
                 {
                     <li>
-                        <a asp-area="" asp-action="Register" asp-controller="Account"> Register</a>
+                        <a asp-area="" asp-action="Register" asp-controller="Account">Register</a>
                     </li>
                     <li>
                         <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>

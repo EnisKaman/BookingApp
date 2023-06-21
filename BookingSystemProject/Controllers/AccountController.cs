@@ -1,19 +1,18 @@
 ﻿namespace BookingSystemProject.Controllers
 {
     using BookingSystem.Core.Models.Account;
+    using BookingSystem.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using System.Security.Claims;
 
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -32,7 +31,7 @@
             {
                 return View(registerViewModel);
             }
-            var user = new IdentityUser()
+            var user = new User()
             {
                 Email = registerViewModel.Email,
                 UserName = registerViewModel.Username

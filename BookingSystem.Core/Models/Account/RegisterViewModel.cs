@@ -13,7 +13,7 @@
         public string Password { get; set; } = null!;
         [EmailAddress]
         [Required]
-        [StringLength(EmailMaxLength, MinimumLength = EmailMinLength)]
+        [StringLength(UserEmailAddressMaxValue, MinimumLength = UserEmailAddressMinValue)]
         public string Email { get; set; } = null!;
         [Required]
         [DataType(DataType.Password)]

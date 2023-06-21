@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookingSystemProject.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(BookingContext))]
     [Migration("20230614144037_AddUsers")]
     partial class AddUsers
     {
