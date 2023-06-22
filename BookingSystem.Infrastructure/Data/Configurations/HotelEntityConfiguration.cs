@@ -11,7 +11,7 @@
             builder.HasMany(h => h.Rooms)
                 .WithOne(r => r.Hotel)
                 .OnDelete(DeleteBehavior.NoAction);
-           
+
             ICollection<Hotel> hotelCollection = CreateHotels();
             builder.HasData(hotelCollection);
         }
@@ -30,67 +30,31 @@
                     StarRating = 5,
                     Latitude =  42.032235406916385m,
                     Longitude = 23.987805838924398m,
-                    Rooms = new List<Room>()
-                    {
-                        new Room()
-                        {
-                            Id = 1,
-                        },
-                        new Room()
-                        {
-                            Id = 2
-                        },
-                        new Room()
-                        {
-                            Id = 3
-                        }
-                    },
-                    HotelBenefits = new List<HotelBenefits>()
-                    {
-                        new HotelBenefits()
-                        {
-                            BenefitId = 2,
-                            HotelId = 1
-                        },
-                        new HotelBenefits()
-                        {
-                            BenefitId = 4,
-                            HotelId = 1
-                        },
-                        new HotelBenefits()
-                        {
-                            BenefitId = 6,
-                            HotelId = 1,
-                        },
-                        new HotelBenefits()
-                        {
-                            BenefitId = 7,
-                            HotelId = 1
-                        },
-                        new HotelBenefits()
-                        {
-                            BenefitId = 5,
-                            HotelId = 1
-                        },
-                        new HotelBenefits()
-                        {
-                            BenefitId = 8,
-                            HotelId = 1
-                        }
-                    }
-
+                    HotelBenefits = AddBenefitsToHotel(1, new int[]{2,4,6,7,5,8})
                 },
                 new Hotel()
                 {
                     Id = 2,
                     City = "Velingrad",
                     Country = "Bulgaria",
-                    Name = "Infinity",
+                    Name = "Spa hotel Infinity",
                     Description = "Добре дошли  в СПА ХОТЕЛ ИНФИНИТИ ПАРК ВЕЛИНГРАД  – място, където ще намерите комфорт и планинско спокойствие.\r\n\r\nНашият пет звезден хотел предлага 95 луксозни стаи и апартаменти, отлични конферентни съоръжения, изискана кухня и уникален спа център.\r\nЗакрити термални басейни /полуолимпийски плувен, акватоничен, детски, бебешки, ледено шоков и контрастен/,\r\nджакузи 3 бр., парна баня, билкова парна баня, приключенски душ, кнайп пътека, горска пътека, финландска сауна,\r\nбилкова сауна, инфрачервена сауна , солна баня, турска баня, японска баня, релакс зона, външни бани, фитнес,\r\nсезонен панорамен инфинити басейн, джакузи, сауна и открити басейни.",
-                }
+                    Latitude = 42.030206649356195m,
+                    Longitude = 23.979628495721478m,
+                    HotelBenefits = AddBenefitsToHotel(2, new int[]{2,4,6,7,5,8})
+                },
 
             };
             return hotels;
+        }
+        private ICollection<HotelBenefits> AddBenefitsToHotel(int hotelId, int[] beneftIds)
+        {
+            ICollection<HotelBenefits> hotelBenefits = new List<HotelBenefits>();
+            for (int i = 0; i < beneftIds.Length; i++)
+            {
+                hotelBenefits.Add(new HotelBenefits() { HotelId = hotelId, BenefitId = beneftIds[i] });
+            }
+            return hotelBenefits;
         }
     }
 }

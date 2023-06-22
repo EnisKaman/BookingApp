@@ -57,7 +57,7 @@
             public const int MinHotelNameValue = 4;
             public const int MaxHotelNameValue = 20;
 
-            public const int MaxDescriptionValue = 200;
+            public const int MaxDescriptionValue = 800;
 
             public const int MaxCityValue = 58;
             public const int MinCityValue = 4;
@@ -85,7 +85,7 @@
 
             public const int MinCountNightsValue = 1;
 
-            public const int MaxDescriptionValue = 200;
+            public const int MaxDescriptionValue = 800;
         }
         public static class RoomTypeEntity
         {

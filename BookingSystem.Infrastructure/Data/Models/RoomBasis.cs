@@ -3,11 +3,16 @@
     using System.ComponentModel.DataAnnotations;
     public class RoomBasis
     {
+        public RoomBasis()
+        {
+            RoomBases = new List<RoomsBases>();
+        }
         [Key]
         public int Id { get; init; }
         [Required]
         public string Name { get; set; } = null!;
         [Required]
         public string ClassIcon { get; set; } = null!;
+        public ICollection<RoomsBases> RoomBases { get; set; }
     }
 }

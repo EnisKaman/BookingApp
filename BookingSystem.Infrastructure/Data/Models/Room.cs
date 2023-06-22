@@ -8,6 +8,7 @@
         public Room()
         {
             Pictures = new List<Picture>();
+            RoomBases = new List<RoomsBases>();
             IsAvalilable = true;
         }
         [Key]
@@ -24,6 +25,7 @@
         public Hotel Hotel { get; set; } = null!;
         public decimal PricePerNight { get; set; }
         public ICollection<Picture> Pictures { get; set; }
+        public ICollection<RoomsBases> RoomBases { get; set; }
         public DateTime? OccupyStartDate { get; set; }
         public DateTime? OccupyEndDate { get; set; }
     }
