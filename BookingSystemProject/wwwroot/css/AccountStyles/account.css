@@ -1,4 +1,4 @@
-﻿﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');
+﻿/*﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');*/
 * {
     margin: 0;
     padding: 0;
@@ -143,12 +143,12 @@ section:not(:last-of-type) {
     margin-top: 3rem;
 }
 
-    .error-container ul li {
-        font-size: 1.7rem;
-        color: red;
-        font-weight: bolder;
-        list-style: none;
-    }
+.error-container ul li {
+  font-size: 1.7rem;
+  color: red;
+  font-weight: bolder;
+  list-style: none;
+}
 
 .create-account-msg {
     font-size: 1.6rem;
@@ -156,9 +156,9 @@ section:not(:last-of-type) {
     font-weight: bold;
 }
 
-    .create-account-msg a {
-        color: white;
-    }
+.create-account-msg a {
+    color: white;
+}
 
 .content-logo {
     color: white;

@@ -1,3 +1,5 @@
+using BookingSystem.Core.Contracts;
+using BookingSystem.Core.Services;
 using BookingSystem.Infrastructure.Data.Models;
 using BookingSystemProject.Data;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +22,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddEntityFrameworkStores<BookingContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IHotelService, HotelService>();
 
 var app = builder.Build();
 

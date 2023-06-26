@@ -1,21 +1,23 @@
-﻿using BookingSystemProject.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace BookingSystemProject.Controllers
+﻿namespace BookingSystemProject.Controllers
 {
+    using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Hotel;
+    using BookingSystemProject.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHotelService hotelService;
+        public HomeController(IHotelService hotelService)
         {
-            _logger = logger;
+            this.hotelService = hotelService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<HotelCardViewModel> hotels = await hotelService.GetAllAsync();
+            return View(hotels);
         }
 
 

@@ -12,6 +12,7 @@
             Pictures = new List<Picture>();
             HotelBenefits = new List<HotelBenefits>();
             Comments = new List<Comment>();
+            Reservations = new List<Reservation>();
         }
         [Key]
         public int Id { get; set; }
@@ -39,5 +40,6 @@
         public ICollection<Picture> Pictures { get; set; }
         public List<HotelBenefits> HotelBenefits { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }

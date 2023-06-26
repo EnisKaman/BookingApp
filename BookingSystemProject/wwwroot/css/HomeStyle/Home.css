@@ -1,0 +1,100 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+header{
+  /*position:fixed;
+  top:0;
+  left:0;
+  width:99%;
+  padding: 3rem;
+  z-index: 9999;
+  background-color:transparent;*/
+}
+.introduction-section {
+  height: auto;
+  background: url('/img/pexels-tom-fisk-3542371.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 15rem 5rem;
+}
+.intro-title{
+  font-size: 5rem;
+  text-transform:capitalize;
+  color:white;
+  font-weight:bold;
+  margin-bottom:2rem;
+}
+.intro-link{
+  display:inline-block;
+  color:white;
+  text-decoration: none;
+  border:none;
+  background-color:mediumpurple;
+  padding: 12px 14px;
+  margin-top: 2rem;
+  border-radius: 6px;
+  font-weight:bolder;
+  text-transform:capitalize;
+  font-size:1.7rem;
+  transition: 0.5s ease all;
+}
+.intro-content{
+  font-size:2.4rem;
+  color:white;
+  width:40%;
+  line-height:1.6;
+}
+.intro-link:hover{
+  opacity: 0.9;
+  transform:scale(1.1);
+}
+.services {
+   padding: 5rem 5rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.service-title{
+   font-size:3rem;
+   text-transform: capitalize;
+   text-align:left;
+   margin-bottom: 2rem;
+}
+.service-description{
+  font-size:2.2rem;
+  line-height: 1.5;
+  text-align:center;
+  width: 60%;
+  margin-bottom: 2rem;
+}
+.img-container img{
+  height:200px;
+  width:200px;
+  box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+}
+.cards{
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 15rem;
+}
+.card {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  border: 1px solid #eaeaea;
+  padding: 2rem;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+.card-content{
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 5px 30px 56.1276px rgb(55 55 55 / 12%);
+    border: 1px solid transparent;
+}
