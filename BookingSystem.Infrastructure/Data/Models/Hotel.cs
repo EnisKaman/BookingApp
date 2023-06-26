@@ -1,6 +1,8 @@
 ﻿namespace BookingSystem.Infrastructure.Data.Models
 {
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static Common.EntityValidation.HotelEntity;
     public class Hotel
     {
@@ -9,6 +11,7 @@
             Rooms = new List<Room>();
             Pictures = new List<Picture>();
             HotelBenefits = new List<HotelBenefits>();
+            Comments = new List<Comment>();
         }
         [Key]
         public int Id { get; set; }
@@ -23,7 +26,9 @@
 
         [MaxLength(MaxDescriptionValue)]
         public string? Description { get; set; }
+        [Column(TypeName = "decimal(17, 15)")]
         public decimal Longitude { get; set; }
+        [Column(TypeName = "decimal(17, 15)")]
         public decimal Latitude { get; set; }
         public bool IsDeleted { get; set; }
         [Required]
@@ -32,6 +37,7 @@
         public bool IsFavorite { get; set; }
         public ICollection<Room> Rooms { get; set; }
         public ICollection<Picture> Pictures { get; set; }
-        public ICollection<HotelBenefits> HotelBenefits { get; set; }
+        public List<HotelBenefits> HotelBenefits { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

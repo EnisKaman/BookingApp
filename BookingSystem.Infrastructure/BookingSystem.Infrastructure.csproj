@@ -21,4 +21,8 @@
     <ProjectReference Include="..\BookingSystem.Common\BookingSystem.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

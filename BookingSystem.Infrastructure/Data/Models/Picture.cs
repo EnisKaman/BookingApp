@@ -15,8 +15,5 @@
         [ForeignKey(nameof(Room))]
         public int? RoomId { get; set; }
         public Room? Room { get; set; }
-        [ForeignKey(nameof(Camping))]
-        public int? CampingId { get; set; }
-        public Camping? Camping { get; set; }
     }
 }

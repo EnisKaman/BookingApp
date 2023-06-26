@@ -55,9 +55,9 @@
             public const int MaxStarValue = 5;
 
             public const int MinHotelNameValue = 4;
-            public const int MaxHotelNameValue = 20;
+            public const int MaxHotelNameValue = 40;
 
-            public const int MaxDescriptionValue = 800;
+            public const int MaxDescriptionValue = 2000;
 
             public const int MaxCityValue = 58;
             public const int MinCityValue = 4;
@@ -67,25 +67,10 @@
             public const int MinRoomCapacity = 1;
             public const int MaxRoomCapacity = 5;
 
+            public const int DescriptionMinLength = 15;
+            public const int MaxDescriptionValue = 1900;
+
             public const decimal MinPricePerNightValue = 30;
-        }
-        public static class CampingEntity
-        {
-            public const int MinCampingNameValue = 4;
-            public const int MaxCampingNameValue = 20;
-
-            public const int MinCountryValue = 4;
-            public const int MaxCountryValue = 56;
-
-            public const int MaxCityValue = 58;
-            public const int MinCityValue = 4;
-
-            public const int MinCapacity = 1;
-            public const int MaxCapacity = 10;
-
-            public const int MinCountNightsValue = 1;
-
-            public const int MaxDescriptionValue = 800;
         }
         public static class RoomTypeEntity
         {
@@ -104,6 +89,16 @@
 
             public const int UserEmailAddressMinValue = 10;
             public const int UserEmailAddressMaxValue = 30;
+        }
+        public static class CommentEntity
+        {
+            public const int DescriptionMinLength = 5;
+            public const int DescriptionMaxLength = 500;
+        }
+        public static class RoomPackageEntity
+        {
+            public const int NameMinLength = 4;
+            public const int NameMaxLength = 20;
         }
     }
 }

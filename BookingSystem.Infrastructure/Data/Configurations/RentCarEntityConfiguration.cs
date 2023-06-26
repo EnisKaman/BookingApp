@@ -257,7 +257,7 @@
                      },
                      new RentCar()
                      {
-                       Id = 14,
+                       Id = 15,
                        MakeType = "Skoda",
                        ModelType = "Ocativa",
                        Year = 2013,
@@ -274,7 +274,7 @@
                      },
                      new RentCar()
                      {
-                        Id = 15,
+                        Id = 16,
                         MakeType = "Bmw",
                         ModelType = "X3",
                         Year = 2018,
@@ -282,23 +282,6 @@
                         CarImg = "/img/Cars/Bmw X3 2018.jpg",
                         PricePerDay = 150,
                         FuelCapacity = 60,
-                        FuelConsumption = 13.4,
-                        Location = "Sofia",
-                        Lattitude = 42.700866541296215m,
-                        Longitude = 23.304447911974357m,
-                        TransmissionType = TransmissionType.AutomaticTransmission,
-                        PeopleCapacity = 4,
-                     },
-                     new RentCar()
-                     {
-                        Id = 16,
-                        MakeType = "Bmw",
-                        ModelType = "X6",
-                        Year = 2020,
-                        DoorsCount = 4,
-                        CarImg = "/img/Cars/BmwX6 Blue.jpeg",
-                        PricePerDay = 180,
-                        FuelCapacity = 85,
                         FuelConsumption = 13.4,
                         Location = "Sofia",
                         Lattitude = 42.700866541296215m,
@@ -317,6 +300,23 @@
                         PricePerDay = 180,
                         FuelCapacity = 85,
                         FuelConsumption = 13.4,
+                        Location = "Sofia",
+                        Lattitude = 42.700866541296215m,
+                        Longitude = 23.304447911974357m,
+                        TransmissionType = TransmissionType.AutomaticTransmission,
+                        PeopleCapacity = 4,
+                     },
+                     new RentCar()
+                     {
+                        Id = 18,
+                        MakeType = "Bmw",
+                        ModelType = "X6",
+                        Year = 2020,
+                        DoorsCount = 4,
+                        CarImg = "/img/Cars/BmwX6 Blue.jpeg",
+                        PricePerDay = 180,
+                        FuelCapacity = 85,
+                        FuelConsumption = 13.4,
                         Location = "Milano",
                         Lattitude = 45.43995264548058m,
                         Longitude = 9.20198333778624m,
@@ -325,7 +325,7 @@
                      },
                    new RentCar()
                    {
-                      Id = 18,
+                      Id = 19,
                       MakeType = "Peugeot",
                       ModelType = "2008",
                       Year = 2019,
@@ -342,7 +342,7 @@
                    },
                     new RentCar()
                     {
-                      Id = 19,
+                      Id = 20,
                       MakeType = "Peugeot",
                       ModelType = "408",
                       Year = 2015,
@@ -359,7 +359,7 @@
                     },
                     new RentCar()
                     {
-                      Id = 20,
+                      Id = 21,
                       MakeType = "Mercedes",
                       ModelType = "CLA",
                       Year = 2014,
@@ -376,7 +376,7 @@
                     },
                     new RentCar()
                     {
-                       Id = 9,
+                       Id = 22,
                        MakeType = "Mercedes",
                        ModelType = "C63",
                        Year = 2012,
@@ -393,7 +393,7 @@
                     },
                     new RentCar()
                     {
-                       Id = 21,
+                       Id = 23,
                        MakeType = "Mercedes",
                        ModelType = "ML",
                        Year = 2015,

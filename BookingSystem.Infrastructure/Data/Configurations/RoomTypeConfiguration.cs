@@ -23,25 +23,25 @@
                 {
                     Id = 1,
                     Name = "Apartment",
-                    IncreasePercentage = 35,
+                    IncreasePercentage = 40,
                 },
                 new RoomType()
                 {
                     Id = 2,
                     Name = "Studio",
-                    IncreasePercentage = 25
+                    IncreasePercentage = 35
                 },
                 new RoomType()
                 {
                     Id = 3,
                     Name = "Double bed",
-                    IncreasePercentage = 20
+                    IncreasePercentage = 30
                 },
                 new RoomType()
                 {
                     Id = 4,
                     Name = "Village",
-                    IncreasePercentage = 40
+                    IncreasePercentage = 45
                 },
                 new RoomType()
                 {

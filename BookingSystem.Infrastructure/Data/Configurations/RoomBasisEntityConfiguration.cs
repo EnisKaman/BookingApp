@@ -9,10 +9,11 @@
     {
         public void Configure(EntityTypeBuilder<RoomBasis> builder)
         {
-            ICollection<RoomBasis> roomBases = CreateRoomBases();
+            ICollection<RoomBasis> roomBasis = CreateRoomBasis();
+            builder.HasData(roomBasis);
         }
 
-        private ICollection<RoomBasis> CreateRoomBases()
+        private ICollection<RoomBasis> CreateRoomBasis()
         {
             List<RoomBasis> roomBases = new List<RoomBasis>()
             {
@@ -57,6 +58,12 @@
                     Id = 7,
                     Name = "Coffee Jug",
                     ClassIcon = "fa-solid fa-mug-hot"
+                },
+                new RoomBasis()
+                {
+                    Id = 8,
+                    Name = "Shower",
+                    ClassIcon = "fa-solid fa-shower"
                 }
             };
             return roomBases;

@@ -36,7 +36,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\Rooms\" />
+    <Folder Include="wwwroot\img\Hotels\Hotel Marinela\" />
+    <Folder Include="wwwroot\img\Hotels\Hotel Amelia\" />
+    <Folder Include="wwwroot\img\Hotels\Paradise Blue\" />
+    <Folder Include="wwwroot\img\Hotels\NH Collection Milano Porta Nuova\" />
+    <Folder Include="wwwroot\img\Rooms\Hotel Marinela rooms\" />
+    <Folder Include="wwwroot\img\Rooms\Amelia rooms\" />
+    <Folder Include="wwwroot\img\Rooms\Paradise rooms\" />
+    <Folder Include="wwwroot\img\Rooms\Porta Nuova rooms\" />
   </ItemGroup>
 
 </Project>

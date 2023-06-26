@@ -30,7 +30,9 @@
         public bool IsAvailable { get; set; }
         [Required]
         public string Location { get; set; } = null!;
+        [Column(TypeName = "decimal(17, 15)")]
         public decimal Longitude { get; set; }
+        [Column(TypeName = "decimal(17, 15)")]
         public decimal Lattitude { get; set; }
         public decimal PricePerDay { get; set; }
 

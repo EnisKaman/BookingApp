@@ -41,7 +41,14 @@
 
     .form-container {
         width: 90%;
-        margin-top: 4rem
+        margin-top: 4rem;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .register-form {
+        width: 60%;
+        margin-bottom: 2rem;
     }
 }
 /*under 450px*/
@@ -87,10 +94,14 @@
     }
 
     .form-container {
-        width: 97%;
+        width: 90%;
         margin-top: 4rem;
         flex-direction: column;
         gap: 2rem;
+    }
+    .register-form {
+        width: 60%;
+        margin-bottom: 2rem;
     }
 }
 /*between 701px command 1000px*/
@@ -122,6 +133,10 @@
         margin-top: 3rem;
         width: 85%;
         gap: 2.5rem;
+        flex-direction:column;
+    }
+    .content-section p {
+        font-size: 1.3rem;
     }
 }
 @media screen and (min-width:1001px) {
