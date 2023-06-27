@@ -48,18 +48,20 @@
             </div>
         </div>
     </section>
-    <section class="destinations">
-        <h2 class="title">Our best Hotels</h2>
-        <div class="hotels">
-            @foreach (HotelCardViewModel hotel in Model)
-            {
+</section>
+<section class="destinations">
+    <h2 class="title">Our best Hotels</h2>
+    <div class="hotels">
+        @foreach (HotelCardViewModel hotel in Model)
+        {
+            <div class="hotel-container">
                 <div class="hotel-img-container">
-                    <img src="@hotel.Pictures.First().Path">
-                    <p>@hotel.City</p>
-                    <p>@hotel.Name</p>
+                    <a asp-controller="Hotel" asp-action="Info" asp-route-id = "@hotel.Id"><img src="@hotel.Pictures.First().Path"></a>
+                    <p class="country">@hotel.Country</p>
+                    <p class="hotel-name">@hotel.Name</p>
                 </div>
                 <div class="content">
-                    <p>@hotel.Country</p>
+                    <p class="hotel-city"><i class="fa-solid fa-location-dot"></i>@hotel.City</p>
                     <ul class="star-list">
                         @for (int i = 0; i < hotel.Stars; i++)
                         {
@@ -67,7 +69,8 @@
                         }
                     </ul>
                 </div>
-            }
-        </div>
-    </section>
+            </div>
+        }
+    </div>
 </section>
+

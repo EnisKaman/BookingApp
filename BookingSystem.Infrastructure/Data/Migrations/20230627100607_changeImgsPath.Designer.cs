@@ -4,6 +4,7 @@ using BookingSystemProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230627100607_changeImgsPath")]
+    partial class changeImgsPath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,7 +266,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             IsFavorite = false,
                             Latitude = 45.48175408930197m,
                             Longitude = 9.1916942539707m,
-                            Name = "NH Collection Milano Porta Nuova",
+                            Name = "Hotel NH Collection Milano Porta Nuova",
                             StarRating = 4
                         },
                         new

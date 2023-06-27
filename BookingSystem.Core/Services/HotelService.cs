@@ -15,13 +15,15 @@
         {
             this.bookingContext = bookingContext;
         }
-        public async Task<IEnumerable<HotelCardViewModel>> GetAllAsync()
+
+        public async Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync()
         {
             IEnumerable<HotelCardViewModel> hotels = await bookingContext.Hotels.
                 OrderByDescending(h => h.Reservations.Count)
                 .ThenBy(h => h.StarRating)
                  .Select(h => new HotelCardViewModel()
                  {
+                     Id = h.Id,
                      Name = h.Name,
                      Country = h.Country,
                      City = h.City,
@@ -29,7 +31,7 @@
                      Pictures = h.Pictures.Select(p => new PictureViewModel()
                      {
                          Path = p.Path,
-                     }).ToArray()
+                     }).ToList()
                  })
                  .Take(4)
                  .ToListAsync();

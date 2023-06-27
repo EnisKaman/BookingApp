@@ -7,10 +7,11 @@
         {
             Pictures = new List<PictureViewModel>();
         }
+        public int Id { get; init; }
         public string Name { get; set; } = null!;
         public string Country { get;set; } = null!;
         public string City { get; set; } = null!;
         public int Stars { get; set; }
-        public IEnumerable<PictureViewModel> Pictures { get; set; }
+        public List<PictureViewModel> Pictures { get; set; }
     }
 }

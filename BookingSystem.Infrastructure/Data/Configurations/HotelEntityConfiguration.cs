@@ -63,7 +63,7 @@
                 Id = 4,
                 City = "Milan",
                 Country = "Italy",
-                Name = "Hotel NH Collection Milano Porta Nuova",
+                Name = "NH Collection Milano Porta Nuova",
                 StarRating = 4,
                 Latitude = 45.48175408930197m,
                 Longitude = 9.1916942539707m,

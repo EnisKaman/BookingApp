@@ -16,7 +16,7 @@
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<HotelCardViewModel> hotels = await hotelService.GetAllAsync();
+            IEnumerable<HotelCardViewModel> hotels = await hotelService.GetTopHotelsAsync();
             return View(hotels);
         }
 

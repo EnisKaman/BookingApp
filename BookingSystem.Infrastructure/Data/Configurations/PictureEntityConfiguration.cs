@@ -172,7 +172,7 @@
                  {
                      Id = 25,
                      RoomId = 7,
-                     Path = "/img/Rooms/Spa hotel Infinity rooms/Spa hotel Infinity rooms/Spa Hotel Infinity house2.jpg",
+                     Path = "/img/Rooms/Spa hotel Infinity rooms/Spa Hotel Infinity house2.jpg",
                  },
                  new Picture()
                  {
@@ -286,7 +286,7 @@
                  {
                      Id = 44,
                      RoomId = 13,
-                     Path = "/img/Rooms/Porta Nuova rooms/Porta Nuova aapartment2.jpg"
+                     Path = "/img/Rooms/Porta Nuova rooms/Porta Nuova apartment2.jpg"
                  },
                  new Picture()
                  {
@@ -316,13 +316,13 @@
                  {
                      Id = 49,
                      RoomId = 14,
-                     Path = "/img/Rooms//Paradise rooms/Paradise doublebed1.jpg"
+                     Path = "/img/Rooms/Paradise rooms/Paradise doublebed1.jpg"
                  },
                  new Picture()
                  {
                      Id = 50,
                      RoomId = 14,
-                     Path = "/img/Rooms//Paradise rooms/Paradise doublebed2.jpg"
+                     Path = "/img/Rooms/Paradise rooms/Paradise double bed2.jpg"
                  },
                  new Picture()
                  {
@@ -334,19 +334,19 @@
                  {
                      Id = 52,
                      RoomId = 15,
-                     Path = "/img/Rooms/Paradise rooms/Paradise stuido2.jpg"
+                     Path = "/img/Rooms/Paradise rooms/Paradise studio2.jpg"
                  },
                  new Picture()
                  {
                      Id = 53,
                      RoomId = 15,
-                     Path = "/img/Rooms/Paradise rooms/Paradise stuido3.jpg"
+                     Path = "/img/Rooms/Paradise rooms/Paradise studio3.jpg"
                  },
                  new Picture()
                  {
                      Id = 54,
                      RoomId = 15,
-                     Path = "/img/Rooms/Paradise rooms/Paradise stuido4.jpg"
+                     Path = "/img/Rooms/Paradise rooms/Paradise stuido 4.jpg"
                  },
                  new Picture()
                  {
@@ -364,19 +364,19 @@
                  {
                      Id = 57,
                      HotelId = 6,
-                     Path = "/Hotels/Hotel Amelia/Hotel Amelia1.jpg"
+                     Path = "/img/Hotels/Hotel Amelia/Hotel Amelia1.jpg"
                  },
                  new Picture()
                  {
                      Id = 58,
                      HotelId = 6,
-                     Path = "/Hotels/Hotel Amelia/Hotel Amelia2.jpg"
+                     Path = "/img/Hotels/Hotel Amelia/Hotel Amelia2.jpg"
                  },
                  new Picture()
                  {
                      Id = 59,
                      HotelId = 6,
-                     Path = "/Hotels/Hotel Amelia/Hotel Amelia3.jpg"
+                     Path = "/img/Hotels/Hotel Amelia/Hotel Amelia3.jpg"
                  },
                  new Picture()
                  {
@@ -431,6 +431,12 @@
                      Id = 68,
                      RoomId = 19,
                      Path = "/img/Rooms//Amelia rooms/Amelia double bed delux4.jpg"
+                 },
+                 new Picture()
+                 {
+                     Id = 69,
+                     HotelId = 4,
+                     Path = "/img/Hotels/NH Collection Milano Porta Nuova/Porta Nuova2.jpg"
                  }
             };
             return pictures;
