@@ -1,29 +1,30 @@
-﻿﻿*,
-::before
-,::after {
-   outline: none;
-   padding: 0px;
-   margin: 0px;
+﻿*,
+*::before,
+*::after {
+    outline: none;
+    padding: 0px;
+    margin: 0px;
 }
 body{
     margin: 0px;
 }
 header {
-    background-color: darkblue;
-    padding: 25px 2.2rem;
+  background-color: darkblue;
+  padding: 25px 2.2rem;
+  font-family: 'Paytone One', sans-serif;
 }
 
 .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav-list {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
 }
 
 .nav-list li a {
@@ -49,44 +50,45 @@ header {
 }
 
 .nav-list li a::before {
-   position: absolute;
-   content: "";
-   width: 0%;
-   height: 3px;
-   left: 0;
-   bottom: 0;
-   background-color: white;
-   transition: 0.5s ease;
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  transition: 0.5s ease;
 }
 
 .nav-list li a:hover::before {
-    width: 100%;
-    bottom: -4px;
+  width: 100%;
+  bottom: -4px;
 }
 
 #menu-btn {
-    font-size: 3rem;
-    color: white;
-    margin-left: auto;
-    padding: 1.3rem 0rem 0rem 1.5rem;
-    display: none;
+  font-size: 3rem;
+  color: white;
+  margin-left: auto;
+  padding: 1.3rem 0rem 0rem 1.5rem;
+  display: none;
 }
 
 .drop-down-menu {
-    position: absolute;
-    top: 94px;
-    right: 0;
-    background-color:white;
-    width: 200px;
-    height: 500vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.2rem;
-    padding: 4rem;
-    transition: height 0.5s ease all;
-    list-style: none;
+  position: absolute;
+  top: 110px;
+  right: 0;
+  background-color:white;
+  width: 200px;
+  height: 1000vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  padding: 4rem;
+  transition: height 0.5s ease all;
+  list-style: none;
+  z-index: 10;
 }
 .drop-down-menu li a {
   color: black;

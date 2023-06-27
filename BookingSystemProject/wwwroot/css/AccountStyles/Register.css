@@ -1,20 +1,22 @@
-﻿* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "poppins",sans-serif;
-    outline: none;
-    border: none;
+﻿*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins",sans-serif;
+  outline: none;
+  border: none;
 }
 header{
     background-color: transparent;
 }
 body {
-    background-image: url('/img/Booking project register-background img.jpg');
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
+   background-image: url('/img/Booking project register-background img.jpg');
+   background-position: center;
+   background-size: cover;
+   height: 100vh;
+   width: 100%;
 }
 
 .title {

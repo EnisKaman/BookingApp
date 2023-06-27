@@ -56,7 +56,9 @@
         {
             <div class="hotel-container">
                 <div class="hotel-img-container">
-                    <a asp-controller="Hotel" asp-action="Info" asp-route-id = "@hotel.Id"><img src="@hotel.Pictures.First().Path"></a>
+                    <a asp-controller="Hotel" asp-action="Info" asp-route-id = "@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
+                    <p class="original-img-path" style="display:none">@hotel.Pictures[0].Path</p>
+                    <p class="second-img-path" style="display:none">@hotel.Pictures[1].Path</p>
                     <p class="country">@hotel.Country</p>
                     <p class="hotel-name">@hotel.Name</p>
                 </div>
@@ -74,3 +76,4 @@
     </div>
 </section>
 
+<script src="~/js/Home/home.js"></script>
