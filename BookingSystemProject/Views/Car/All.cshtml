@@ -1,0 +1,117 @@
+﻿@using BookingSystem.Core.Models.Ordering
+@using BookingSystem.Core.Models.Page;
+@model IEnumerable<CarViewModel>
+
+@{
+
+    Pager pager = new Pager();
+    int pageNumber = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = (Pager)ViewBag.Pager;
+        pageNumber = pager.CurrentPage;
+    }
+}
+
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/CarStyle/CarAll.css" asp-append-version="true" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+
+
+<section class="intro">
+    <h2 class="title">Rent a car</h2>
+    <p class="content">"Rent a Car" service provides convenient and flexible transportation options for your travel needs.</p>
+</section>
+<section class="about">
+    <h1 class="title">About Rent Car Services</h1>
+    <div class="container">
+        <div class="content-container">
+            <p class="content">
+                "Rent a Car" service offers you the convenience and freedom to explore your destination at your own pace.
+                Whether you're a leisure traveler or a business professional, our diverse fleet of vehicles provides options to suit your needs.
+                From compact cars for urban adventures to spacious SUVs for family getaways, we have the perfect car to enhance your travel
+                experience. Enjoy the flexibility and convenience of "Rent a Car" service and make the most out of your journey.
+            </p>
+            <div class="benefits-container">
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i>Convenience and Mobility</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Flexibility and Freedom</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Wide Selection</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Hassle-Free Travel</li>
+                </ul>
+            </div>
+        </div>
+        <div class="img-container">
+            <img src="~/img/Car section img.jpg" />
+        </div>
+    </div>
+</section>
+<form method="post" asp-controller="Car" asp-action="All" class="form-container">
+    <p><i class="fa-solid fa-arrow-up-wide-short"></i>Sort By</p>
+    <select asp-for="@ViewData["SelectedOption"]" name="selectedOption" id="selectedOption">
+        @{
+            SelectViewModel selectViewModel = (SelectViewModel)ViewData["Options"];
+            if (selectViewModel != null)
+            {
+
+                @foreach (var option in selectViewModel.Options)
+                {
+                    <option value="@option.Value">@option.Text</option>
+                }
+            }
+        }
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<section class="cars">
+    <h1 class="title">Our Offers</h1>
+    @* May become partial view*@
+    <div class="cars-container">
+        @foreach (CarViewModel car in Model)
+        {
+            <div class="card">
+                <div class="car-img-container">
+                    <img src="@car.CarImg">
+                </div>
+                <p class="car-name">@car.MakeType @car.Model</p>
+                <p class="car-year">Year: @car.Year</p>
+                <p class="price">$@car.PricePerDay / Day</p>
+                <p class="car-location"><i class="fa-solid fa-location-dot"></i>@car.Location</p>
+                <div class="btn-container">
+                    <a class="details-btn" asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                    <a class="rent-btn" asp-controller="Car" asp-action="Rent" asp-route-id="@car.Id">Rent</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+<div class="pagination-container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="page-list">
+            @for (int page = pager.StartPage; page <= pager.EndPage; page++)
+            {
+                <li class="page-item @(page == pager.CurrentPage ? "active": "")">
+                    <a class="page-number" asp-controller="Car" asp-action="All" asp-route-pg="@(page)">@(page)</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+<script>
+    const headerElement = document.querySelector("header");
+    console.log(headerElement);
+    window.addEventListener("scroll", () => {
+        headerElement.classList.toggle("sticky", window.scrollY > 0);
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const selectedOption = "@ViewData["SelectedOption"]";
+        const selectElement = document.getElementById("selectedOption");
+        selectElement.value = selectedOption;
+    });
+
+</script>

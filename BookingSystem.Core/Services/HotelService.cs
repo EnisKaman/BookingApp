@@ -20,7 +20,7 @@
         {
             IEnumerable<HotelCardViewModel> hotels = await bookingContext.Hotels.
                 OrderByDescending(h => h.Reservations.Count)
-                .ThenBy(h => h.StarRating)
+                .ThenByDescending(h => h.StarRating)
                  .Select(h => new HotelCardViewModel()
                  {
                      Id = h.Id,
@@ -33,6 +33,7 @@
                          Path = p.Path,
                      }).ToList()
                  })
+
                  .Take(4)
                  .ToListAsync();
 

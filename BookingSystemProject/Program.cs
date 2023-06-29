@@ -23,6 +23,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddEntityFrameworkStores<BookingContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IHotelService, HotelService>();
+builder.Services.AddScoped<ICarService, CarService>();
 
 var app = builder.Build();
 
