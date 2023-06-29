@@ -24,7 +24,7 @@
                ViewBag.Options = CreateSelectOptions();
             }
             string selectedOption = "default";
-            if (!string.IsNullOrWhiteSpace(sort))
+            if (!string.IsNullOrWhiteSpace(sort) && IsExist(sort))
             {
                 selectedOption = sort;
             }
@@ -33,9 +33,8 @@
            IEnumerable <CarViewModel> cars = await carService.GetAllAsync(selectedOption);
 
             Pager pager = new Pager(cars.Count(), pg);
-            int recordsToSkip = (pg - 1) * pager.PageZise;
-
-            cars = cars.Skip(recordsToSkip).Take(pager.PageZise);
+            int recordsToSkip = (pg - 1) * pager.PageSize;
+            cars = cars.Skip(recordsToSkip).Take(pager.PageSize);
             ViewBag.Pager = pager;
             return View(cars);
         }
@@ -78,6 +77,11 @@
                 }
             };
             return selectViewModel;
+        }
+        private bool IsExist(string sortOption)
+        {
+            var model = CreateSelectOptions();
+            return model.Options.Any(opt => opt.Value == sortOption);
         }
     }
 }

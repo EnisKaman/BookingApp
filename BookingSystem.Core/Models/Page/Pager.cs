@@ -2,41 +2,40 @@
 {
     public class Pager
     {
-        private const int _PageSize = 6;
+        private const int _PageSize = 5;
         public Pager()
         {
 
         }
-        public Pager(int totalItems, int currentPage) 
+        public Pager(int totalItems, int currentPage)
+        {
+            Configure(totalItems, currentPage);
+        }
+
+        private void Configure(int totalItems, int currentPage)
         {
             int totalPages = (int)Math.Ceiling((double)totalItems / _PageSize);
             int currPage = currentPage;
-            int startPage = currPage - 5;
-            int endPage = currPage + 5;
-            if (startPage <= 0)
+            int startPage = Math.Max(1, currPage - 3);
+            int endPage = Math.Min(startPage + 3, totalPages);
+
+            if (endPage >= 10)
             {
-                endPage = endPage - (startPage - 1);
-                startPage = 1;
+                startPage = endPage - 6;
             }
-            if(endPage > totalPages)
-            {
-                endPage = totalPages;
-            }
-            if(endPage > 10)
-            {
-                startPage = endPage - 9;
-            }
+
             TotalPages = totalPages;
             CurrentPage = currPage;
-            PageZise = _PageSize;
+            PageSize = _PageSize;
             StartPage = startPage;
             EndPage = endPage;
-            TotalItmes = totalItems;
+            TotalItems  = totalItems;
         }
+
         /// <summary>
         /// Total number of entity records
         /// </summary>
-        public int TotalItmes { get; private set; }
+        public int TotalItems  { get; private set; }
         /// <summary>
         /// The active page on page bar
         /// </summary>
@@ -44,7 +43,7 @@
         /// <summary>
         /// The size of number of records displayed on the page
         /// </summary>
-        public int PageZise { get; private set; }
+        public int PageSize { get; private set; }
         /// <summary>
         /// Total number of pages on page bar
         /// </summary>
