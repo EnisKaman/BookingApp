@@ -13,7 +13,7 @@
             this.carService = carService;
         }
         [HttpGet]
-        public async Task<IActionResult> All(int pg = 1)
+        public async Task<IActionResult> All(int pg = 1, string sort = null)
         {
             if(pg <= 0)
             {
@@ -23,12 +23,14 @@
             {
                ViewBag.Options = CreateSelectOptions();
             }
-            if (ViewData["SelectedOption"] == null)
+            string selectedOption = "default";
+            if (!string.IsNullOrWhiteSpace(sort))
             {
-              ViewData["SelectedOption"] = "default";
+                selectedOption = sort;
             }
-            string sortOption = (string)ViewData["SelectedOption"];
-            IEnumerable<CarViewModel> cars = await carService.GetAllAsync(sortOption);
+            ViewData["SelectedOption"] = selectedOption;
+
+           IEnumerable <CarViewModel> cars = await carService.GetAllAsync(selectedOption);
 
             Pager pager = new Pager(cars.Count(), pg);
             int recordsToSkip = (pg - 1) * pager.PageZise;
@@ -44,12 +46,10 @@
             {
                 ViewBag.Options = CreateSelectOptions();
             }
-            IEnumerable<CarViewModel> cars = await carService.GetAllAsync(selectedOption);
-            string newOption = selectedOption == "default" ? "default" : selectedOption;
-            ViewData["SelectedOption"] = newOption; 
-            return View(cars);
+            string newOption = string.IsNullOrWhiteSpace(selectedOption) ? "default" : selectedOption;
+            return RedirectToAction(nameof(All), new { pg = 1, sort = newOption });
         }
-        private SelectViewModel CreateSelectOptions()
+        private static SelectViewModel CreateSelectOptions()
         {
             SelectViewModel selectViewModel = new SelectViewModel()
             {

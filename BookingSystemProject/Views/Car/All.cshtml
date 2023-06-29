@@ -11,6 +11,10 @@
         pager = (Pager)ViewBag.Pager;
         pageNumber = pager.CurrentPage;
     }
+    var parameters = new Dictionary<string, string>()
+    {
+        {"sort", (string)ViewData["SelectedOption"] ?? "default"}
+    };
 }
 
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
@@ -92,10 +96,22 @@
     @if (pager.TotalPages > 0)
     {
         <ul class="page-list">
+            @if (pager.CurrentPage > pager.StartPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-pg="@(pager.CurrentPage - 1)" asp-route-sort="@((string)ViewData["SelectedOption"])">Previous</a>
+                </li>
+            }
             @for (int page = pager.StartPage; page <= pager.EndPage; page++)
             {
-                <li class="page-item @(page == pager.CurrentPage ? "active": "")">
-                    <a class="page-number" asp-controller="Car" asp-action="All" asp-route-pg="@(page)">@(page)</a>
+                <li class="page-item">
+                    <a class="page-link @(page == pager.CurrentPage ? "active": "")" asp-controller="Car" asp-action="All" asp-route-pg="@(page)" asp-route-sort="@((string)ViewData["SelectedOption"])">@(page)</a>
+                </li>
+            }
+            @if(pager.CurrentPage < pager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-pg="@(pager.CurrentPage + 1)" asp-route-sort="@((string)ViewData["SelectedOption"])">Next</a>
                 </li>
             }
         </ul>
