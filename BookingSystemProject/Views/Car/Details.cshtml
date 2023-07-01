@@ -1,20 +1,59 @@
 ﻿@model CarDetailsViewModel
 
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/CarStyle/CarDetails.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
 
 <section class="main-section">
+    <h3 class="title">@Model.MakeType @Model.Model</h3>
     <div class="img-container">
         <img src="@Model.CarImg" />
     </div>
     <div class="benefits">
         <ul class="benefit-list">
             <li>
-                <div class="benefit-img"cl>
+                <div class="benefit-icon">
                     <img src="~/img/Cars/CarDor-img.png" />
                 </div>
                 <div class="benefit-description">
                     <h5 class="benefit-title">Doors Count</h5>
                     <p class="beneift-value">@Model.DoorsCount</p>
+                </div>
+            </li>
+            <li>
+                <div class="benefit-icon">
+                    @{
+                        string imgSource = Model.TransmissionType.Contains("Automatic")
+                        ? "/img/Cars/AutomaticTransmissionType.png" : "/img/Cars/ManualTransmissionType-img.png";
+                    }
+                    <img src="@imgSource" />
+                </div>
+                <div class="benefit-description">
+                    <h5 class="benefit-title">Transmission</h5>
+                    <p class="beneift-value">@Model.TransmissionType</p>
+                </div>
+            </li>
+            <li>
+                <div class="benefit-icon">
+                    <img src="~/img/Cars/FuelConsumption.png" />
+                </div>
+                <div class="benefit-description">
+                    <h5 class="benefit-title">Fuel Consumption</h5>
+                    <p class="beneift-value">@Model.FuelConsumption</p>
+                </div>
+            </li>
+            <li>
+                <div class="benefit-icon">
+                    @for (int i = 1; i <= Model.PeopleCapacity; i++)
+                    {
+                        <i class="fa-solid fa-person"></i>
+                    }
+                </div>
+                <div class="benefit-description">
+                    <h5 class="benefit-title">People Capacity</h5>
+                    <p class="beneift-value">@Model.PeopleCapacity</p>
                 </div>
             </li>
         </ul>
