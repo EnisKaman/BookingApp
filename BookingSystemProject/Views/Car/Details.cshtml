@@ -1,0 +1,22 @@
+﻿@model CarDetailsViewModel
+
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+
+<section class="main-section">
+    <div class="img-container">
+        <img src="@Model.CarImg" />
+    </div>
+    <div class="benefits">
+        <ul class="benefit-list">
+            <li>
+                <div class="benefit-img"cl>
+                    <img src="~/img/Cars/CarDor-img.png" />
+                </div>
+                <div class="benefit-description">
+                    <h5 class="benefit-title">Doors Count</h5>
+                    <p class="beneift-value">@Model.DoorsCount</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

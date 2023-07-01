@@ -3,6 +3,8 @@
     using Core.Models.Car;
     public interface ICarService
     {
-        Task<IEnumerable<CarViewModel>> GetAllAsync(string sortOption);
+        Task<IEnumerable<CarAllViewModel>> GetAllAsync(string sortOption);
+        Task<bool> IsCarExistAsync(int carId);
+        Task<CarDetailsViewModel> FindCarByIdAsync(int carId);
     }
 }

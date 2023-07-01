@@ -15,13 +15,13 @@
         [HttpGet]
         public async Task<IActionResult> All(int pg = 1, string sort = null)
         {
-            if(pg <= 0)
+            if (pg <= 0)
             {
                 pg = 1;
             }
             if (ViewBag.Options == null)
             {
-               ViewBag.Options = CreateSelectOptions();
+                ViewBag.Options = CreateSelectOptions();
             }
             string selectedOption = "default";
             if (!string.IsNullOrWhiteSpace(sort) && IsExist(sort))
@@ -30,24 +30,36 @@
             }
             ViewData["SelectedOption"] = selectedOption;
 
-           IEnumerable <CarViewModel> cars = await carService.GetAllAsync(selectedOption);
-
+            IEnumerable<CarAllViewModel> cars = await carService.GetAllAsync(selectedOption);
             Pager pager = new Pager(cars.Count(), pg);
+            if (pg > pager.TotalPages)
+            {
+                pg = pager.TotalPages;
+                pager = new Pager(cars.Count(), pg);
+            }
+
             int recordsToSkip = (pg - 1) * pager.PageSize;
             cars = cars.Skip(recordsToSkip).Take(pager.PageSize);
             ViewBag.Pager = pager;
             return View(cars);
         }
         [HttpPost]
-        public async Task<IActionResult> All([FromForm]string selectedOption)
+        public IActionResult All([FromForm] string selectedOption)
         {
-            if (ViewBag.Options == null)
-            {
-                ViewBag.Options = CreateSelectOptions();
-            }
             string newOption = string.IsNullOrWhiteSpace(selectedOption) ? "default" : selectedOption;
             return RedirectToAction(nameof(All), new { pg = 1, sort = newOption });
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!await carService.IsCarExistAsync(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+            CarDetailsViewModel carDetailsViewModel = await carService.FindCarByIdAsync(id);
+            return View(carDetailsViewModel);
+        }
+
         private static SelectViewModel CreateSelectOptions()
         {
             SelectViewModel selectViewModel = new SelectViewModel()

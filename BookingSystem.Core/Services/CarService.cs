@@ -1,6 +1,7 @@
 ﻿
 namespace BookingSystem.Core.Services
 {
+    using BookingSystem.Infrastructure.Data.enums;
     using BookingSystemProject.Data;
     using Core.Contracts;
     using Core.Models.Car;
@@ -14,14 +15,14 @@ namespace BookingSystem.Core.Services
             this.bookingContext = bookingContext;
         }
 
-        public async Task<IEnumerable<CarViewModel>> GetAllAsync(string sortOption)
+        public async Task<IEnumerable<CarAllViewModel>> GetAllAsync(string sortOption)
         {
-            IEnumerable<CarViewModel> cars;
+            IEnumerable<CarAllViewModel> cars;
             if (sortOption == "year")
             {
                 cars = await bookingContext.RentCars
                     .OrderByDescending(rc => rc.Year)
-                    .Select(rc => new CarViewModel()
+                    .Select(rc => new CarAllViewModel()
                     {
                         Id = rc.Id,
                         Model = rc.ModelType,
@@ -36,7 +37,7 @@ namespace BookingSystem.Core.Services
             {
                 cars = await bookingContext.RentCars
                     .OrderBy(rc => rc.PricePerDay)
-                    .Select(rc => new CarViewModel()
+                    .Select(rc => new CarAllViewModel()
                     {
                         Id = rc.Id,
                         Model = rc.ModelType,
@@ -47,11 +48,11 @@ namespace BookingSystem.Core.Services
                         Year = rc.Year
                     }).ToArrayAsync();
             }
-            else if(sortOption == "make type")
+            else if (sortOption == "make type")
             {
                 cars = await bookingContext.RentCars
                   .OrderBy(rc => rc.MakeType)
-                  .Select(rc => new CarViewModel()
+                  .Select(rc => new CarAllViewModel()
                   {
                       Id = rc.Id,
                       Model = rc.ModelType,
@@ -65,7 +66,7 @@ namespace BookingSystem.Core.Services
             else
             {
                 cars = await bookingContext.RentCars
-                   .Select(rc => new CarViewModel()
+                   .Select(rc => new CarAllViewModel()
                    {
                        Id = rc.Id,
                        Model = rc.ModelType,
@@ -74,9 +75,39 @@ namespace BookingSystem.Core.Services
                        CarImg = rc.CarImg,
                        Location = rc.Location,
                        Year = rc.Year
-                   }).ToArrayAsync();
+                   })
+                   .OrderBy(c => c.Id)
+                   .ToArrayAsync();
             }
             return cars;
+        }
+
+        public async Task<bool> IsCarExistAsync(int carId)
+        {
+            return await bookingContext.RentCars.AnyAsync(c => !c.IsDeleted && c.Id == carId);
+        }
+        public async Task<CarDetailsViewModel> FindCarByIdAsync(int carId)
+        {
+            CarDetailsViewModel carToFind = await bookingContext.RentCars
+                  .Select(rc => new CarDetailsViewModel()
+                  {
+                      Id = rc.Id,
+                      MakeType = rc.MakeType,
+                      Model = rc.ModelType,
+                      PeopleCapacity = rc.PeopleCapacity,
+                      Location = rc.Location,
+                      Longitude = rc.Longitude,
+                      Latitude = rc.Lattitude,
+                      CarImg = rc.CarImg,
+                      DoorsCount = rc.DoorsCount,
+                      FuelCapacity = rc.FuelCapacity,
+                      FuelConsumption = rc.FuelConsumption,
+                      PricePerDay = rc.PricePerDay,
+                      Year = rc.Year,
+                      TransmissionType = rc.TransmissionType == TransmissionType.AutomaticTransmission ?"Automatic Transmission" : "Manual Transmission"
+                  })
+                .FirstAsync(c => c.Id == carId);
+             return carToFind;
         }
     }
 }
