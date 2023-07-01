@@ -13,8 +13,15 @@ h4,
 h5,
 h6,
 a,
-li {
+li,
+table
+{
     font-family: 'Paytone One', sans-serif;
+}
+.main-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .main-section{
   display: flex;
@@ -31,7 +38,7 @@ li {
 }
 .benefit-list .benefit-icon{
    width: 90px;
-   height:auto;
+   height: auto;
    object-fit: cover;
    object-position: center;
 }
@@ -40,15 +47,18 @@ li {
    height: 80px;
 }
 .benefit-list li {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
 .benefit-icon i {
   font-size: 1.7rem;
 }
 .img-container{
   margin: 1rem 0rem 3rem 0rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
 }
 .title{
   font-size: 2.2rem;
@@ -57,4 +67,68 @@ li {
   font-size: 1.4rem;
   text-transform: capitalize;
 }
-
+.more-title{
+  font-size: 2rem;
+  text-transform: capitalize;
+  margin-top: 2.2rem;
+  text-align: center;
+}
+table,
+th,
+td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  text-transform: capitalize;
+}
+table{
+  text-align: center;
+  margin: 1rem 0rem 3rem 0rem;
+}
+table th {
+  padding: 1rem;
+  width: 300px;
+  background-color: #f7f7f7;
+  color: #1e1f24;
+  font-size: 1.7rem;
+}
+table td{
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+.table-container{
+  display: flex;
+  justify-content: center;
+}
+.order-section{
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  text-transform: capitalize;
+  padding: 5rem;
+  border: 1px solid gray;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+}
+.order-title{
+  font-size: 2.6rem;
+}
+.order-price, .order-location{
+  font-size: 1.7rem;
+}
+.order-location i{
+  margin-right: 0.4rem;
+}
+.order-btn {
+  color: white;
+  background-color: #bf7b14;
+  font-size: 1.3rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 150px;
+  text-align: center;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+.order-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
