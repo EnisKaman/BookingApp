@@ -13,7 +13,7 @@
             this.carService = carService;
         }
         [HttpGet]
-        public async Task<IActionResult> All(int pg = 1, string sort = null)
+        public async Task<IActionResult> All(int pg = 1, string? sort = null)
         {
             if (pg <= 0)
             {

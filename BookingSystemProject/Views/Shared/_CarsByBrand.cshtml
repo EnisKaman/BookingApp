@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<CarBrandViewModel>
 
-<section class="cars-section">
+ @*   @{
+        if(Model.Any())
+        {
+           <h2 class="suggest-title": center">suggestions</h2>
+        }
+    }*@
     @foreach (CarBrandViewModel car in Model)
     {
         <section class="card">
@@ -12,4 +17,4 @@
             </div>
         </section>
     }
-</section>
+   
