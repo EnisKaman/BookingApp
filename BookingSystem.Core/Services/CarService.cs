@@ -1,5 +1,4 @@
-﻿
-namespace BookingSystem.Core.Services
+﻿namespace BookingSystem.Core.Services
 {
     using BookingSystem.Infrastructure.Data.enums;
     using BookingSystemProject.Data;
@@ -108,6 +107,21 @@ namespace BookingSystem.Core.Services
                   })
                 .FirstAsync(c => c.Id == carId);
              return carToFind;
+        }
+
+        public async Task<IEnumerable<CarBrandViewModel>> GetCarsByBrandAsync(string brand, int carId)
+        {
+            brand = brand.ToLower();
+            IEnumerable<CarBrandViewModel> cars = await bookingContext.RentCars
+                .Where(rc => rc.MakeType.ToLower() == brand && rc.Id!=carId &&!rc.IsDeleted)
+                .Select(rc => new CarBrandViewModel()
+                {
+                    Id = rc.Id,
+                    MakeType = rc.MakeType,
+                    Model = rc.ModelType,
+                    CarImg = rc.CarImg
+                }).ToArrayAsync();
+            return cars;
         }
     }
 }
