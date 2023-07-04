@@ -1,6 +1,6 @@
 ﻿@using BookingSystem.Core.Models.Ordering
 @using BookingSystem.Core.Models.Page;
-@model IEnumerable<CarAllViewModel>
+@model IEnumerable<CarViewModel>
 
 @{
 
@@ -74,7 +74,7 @@
     <h1 class="title">Our Offers</h1>
     @* May become partial view*@
     <div class="cars-container">
-        @foreach (CarAllViewModel car in Model)
+        @foreach (CarViewModel car in Model)
         {
             <div class="card">
                 <div class="car-img-container">
@@ -86,7 +86,7 @@
                 <p class="car-location"><i class="fa-solid fa-location-dot"></i>@car.Location</p>
                 <div class="btn-container">
                     <a class="details-btn" asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">Details</a>
-                    <a class="rent-btn" asp-controller="Car" asp-action="Rent" asp-route-id="@car.Id">Rent</a>
+                    <a class="rent-btn" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@car.Id">Rent</a>
                 </div>
             </div>
         }
@@ -119,11 +119,6 @@
 </div>
 
 <script>
-    const headerElement = document.querySelector("header");
-    console.log(headerElement);
-    window.addEventListener("scroll", () => {
-        headerElement.classList.toggle("sticky", window.scrollY > 0);
-    });
     document.addEventListener("DOMContentLoaded", () => {
         const selectedOption = "@ViewData["SelectedOption"]";
         const selectElement = document.getElementById("selectedOption");

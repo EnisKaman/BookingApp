@@ -14,14 +14,14 @@
             this.bookingContext = bookingContext;
         }
 
-        public async Task<IEnumerable<CarAllViewModel>> GetAllAsync(string sortOption)
+        public async Task<IEnumerable<CarViewModel>> GetAllAsync(string sortOption)
         {
-            IEnumerable<CarAllViewModel> cars;
+            IEnumerable<CarViewModel> cars;
             if (sortOption == "year")
             {
                 cars = await bookingContext.RentCars
                     .OrderByDescending(rc => rc.Year)
-                    .Select(rc => new CarAllViewModel()
+                    .Select(rc => new CarViewModel()
                     {
                         Id = rc.Id,
                         Model = rc.ModelType,
@@ -36,7 +36,7 @@
             {
                 cars = await bookingContext.RentCars
                     .OrderBy(rc => rc.PricePerDay)
-                    .Select(rc => new CarAllViewModel()
+                    .Select(rc => new CarViewModel()
                     {
                         Id = rc.Id,
                         Model = rc.ModelType,
@@ -51,7 +51,7 @@
             {
                 cars = await bookingContext.RentCars
                   .OrderBy(rc => rc.MakeType)
-                  .Select(rc => new CarAllViewModel()
+                  .Select(rc => new CarViewModel()
                   {
                       Id = rc.Id,
                       Model = rc.ModelType,
@@ -65,7 +65,7 @@
             else
             {
                 cars = await bookingContext.RentCars
-                   .Select(rc => new CarAllViewModel()
+                   .Select(rc => new CarViewModel()
                    {
                        Id = rc.Id,
                        Model = rc.ModelType,
@@ -103,17 +103,17 @@
                       FuelConsumption = rc.FuelConsumption,
                       PricePerDay = rc.PricePerDay,
                       Year = rc.Year,
-                      TransmissionType = rc.TransmissionType == TransmissionType.AutomaticTransmission ?"Automatic Transmission" : "Manual Transmission"
+                      TransmissionType = rc.TransmissionType == TransmissionType.AutomaticTransmission ? "Automatic Transmission" : "Manual Transmission"
                   })
                 .FirstAsync(c => c.Id == carId);
-             return carToFind;
+            return carToFind;
         }
 
         public async Task<IEnumerable<CarBrandViewModel>> GetCarsByBrandAsync(string brand, int carId)
         {
             brand = brand.ToLower();
             IEnumerable<CarBrandViewModel> cars = await bookingContext.RentCars
-                .Where(rc => rc.MakeType.ToLower() == brand && rc.Id!=carId &&!rc.IsDeleted)
+                .Where(rc => rc.MakeType.ToLower() == brand && rc.Id != carId && !rc.IsDeleted)
                 .Select(rc => new CarBrandViewModel()
                 {
                     Id = rc.Id,
@@ -122,6 +122,22 @@
                     CarImg = rc.CarImg
                 }).ToArrayAsync();
             return cars;
+        }
+
+        public async Task<CarViewModel> GetOrderCarAsync(int carId)
+        {
+            CarViewModel carToGet = await bookingContext.RentCars
+                 .Select(rc => new CarViewModel()
+                 {
+                     Id = rc.Id,
+                     CarImg = rc.CarImg,
+                     Location = rc.Location,
+                     MakeType = rc.MakeType,
+                     Model = rc.ModelType,
+                     PricePerDay = rc.PricePerDay,
+                     Year = rc.Year
+                 }).FirstAsync(rc => rc.Id == carId);
+            return carToGet;
         }
     }
 }

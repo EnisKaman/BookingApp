@@ -21,9 +21,16 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireUppercase = false;
 })
     .AddEntityFrameworkStores<BookingContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Home/Index";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(48.60);
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

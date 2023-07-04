@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="~/css/CarStyle/Responsive/Details.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="~/css/base.css asp-append-version="true" />
 
 <div class="main-container">
     <section class="main-section">
@@ -65,7 +65,7 @@
         <h2 class="order-title">@Model.MakeType @Model.Model</h2>
         <p class="order-price">Price per day: @string.Format($"{Model.PricePerDay:F2}$")</p>
         <p class="order-location"><i class="fa-solid fa-location-dot"></i>@Model.Location</p>
-        <a class="order-btn" asp-route-id = "@Model.Id">Rent</a>
+        <a class="order-btn" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@Model.Id">Rent</a>
     </section>
 </div>
 

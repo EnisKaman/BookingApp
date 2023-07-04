@@ -1,0 +1,60 @@
+﻿@model RentCarReservationViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Reservation/RentCarReservation.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+
+<h1 class="title">Complete your rent</h1>
+<div class="order-container">
+    <form class="user-order-info" method="post">
+        <div class="input-container">
+            <label asp-for="@Model.User.FirstName">First Name</label>
+            <input type="text" asp-for="@Model.User.FirstName" aria-required="true" placeholder="Enter First Name" />
+            <span asp-validation-for="@Model.User.FirstName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.LastName">Last Name</label>
+            <input type="text" asp-for="@Model.User.LastName" aria-required="true" placeholder="Enter Last Name" />
+            <span asp-validation-for="@Model.User.LastName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.PhoneNumber>Phone Number</label>
+        <input type=" text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
+            <span asp-validation-for="@Model.User.PhoneNumber"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.Email">Email</label>
+            <input type="text" asp-for="@Model.User.Email" value="@Model.User.Email" readonly />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.StartRentDate">Start Date</label>
+            <input type="date" asp-for="@Model.StartRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" 
+            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+        </div>
+         <div class="input-container">
+            <label asp-for="@Model.StartRentDate">End Date</label>
+            <input type="date" asp-for="@Model.EndRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+         </div>
+        <button class="rent-btn" type="submit">Rent</button>
+    </form>
+    <section class="order-info">
+        <h2 class="order-title">@Model.CarlViewModel.MakeType @Model.CarlViewModel.Model</h2>
+        <div class="img-container">
+            <img src="@Model.CarlViewModel.CarImg" />
+        </div>
+        <hr />
+        <p class="model-year">Model Year: @Model.CarlViewModel.Year</p>
+        <p class="location">Location:<i class="fa-solid fa-location-dot"></i> @Model.CarlViewModel.Location</p>
+         <hr />
+         <p class="price">Price per day: @Model.CarlViewModel.PricePerDay$</p>
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+  

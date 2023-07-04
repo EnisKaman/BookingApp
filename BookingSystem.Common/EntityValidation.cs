@@ -10,14 +10,16 @@
             public const int PasswordMinLength = 5;
             public const int PasswordMaxLength = 30;
 
-            public const int UserFirstNameMinValue = 3;
-            public const int UserFirstNameMaxValue = 15;
+            public const int FirstNameMinValue = 3;
+            public const int FirstNameMaxValue = 15;
 
-            public const int UserLastNameMinValue = 4;
-            public const int UserLastNameMaxValue = 15;
+            public const int LastNameMinValue = 4;
+            public const int LastNameMaxValue = 15;
 
-            public const int UserEmailAddressMinValue = 10;
-            public const int UserEmailAddressMaxValue = 30;
+            public const int EmailAddressMinValue = 10;
+            public const int EmailAddressMaxValue = 30;
+
+            public const int PhoneNumberMaxLength = 20;
         }
         public static class RentCarEntity
         {

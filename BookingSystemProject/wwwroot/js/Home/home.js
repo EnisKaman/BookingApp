@@ -4,12 +4,6 @@ let orginalImgsSrcArrayElements = Array.from(document.querySelectorAll(".hotel-i
 const originalImgsPath = orginalImgsSrcArrayElements.map((el) => el.textContent);
 const secondPicturesPath = secondPicturesPathElements.map((el) => el.textContent);
 
-const headerElement = document.querySelector("header");
-console.log(headerElement);
-window.addEventListener("scroll", () => {
-    headerElement.classList.toggle("sticky", window.scrollY > 0);
-});
-
 
 const containers = document.querySelectorAll(".hotel-img-container img").forEach((container) => {
     container.addEventListener("mouseover", changeImg);
