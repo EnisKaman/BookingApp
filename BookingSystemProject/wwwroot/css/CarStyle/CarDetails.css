@@ -60,7 +60,7 @@ table
 .img-container{
   margin: 1rem 0rem 3rem 0rem;
   width: 700px;
-  height: 400px;
+  height: auto;
   display: flex;
   justify-content: center;
 }
@@ -167,7 +167,7 @@ table td{
 }
 .img-container {
    width: 660px;
-   height: 400px;
+   height: auto;
 }
 .img-container img {
   width: 100%;
