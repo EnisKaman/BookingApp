@@ -1,6 +1,7 @@
 ﻿@media all and (min-width: 280px) and (max-width: 750px) {
   .main-container {
     flex-direction: column;
+    margin-top: 3rem;
   }
 
   .benefit-list {

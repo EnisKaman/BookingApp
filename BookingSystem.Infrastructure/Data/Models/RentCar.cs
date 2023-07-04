@@ -37,7 +37,7 @@
         public decimal PricePerDay { get; set; }
 
         [ForeignKey(nameof(Reservation))]
-        public int? ReservationId { get; set; }
+        public Guid? ReservationId { get; set; }
         public Reservation? Reservation { get; set; }
     }
 }

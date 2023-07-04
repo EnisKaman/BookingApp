@@ -8,9 +8,10 @@
         public Reservation()
         {
             Cars = new List<RentCar>();
+            Id = Guid.NewGuid();
         }
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [ForeignKey(nameof(Room))]
         public int RoomId { get; set; }
         public Room Room { get; set; } = null!;
@@ -40,12 +41,20 @@
         {
             get
             {
-                if (Cars.Any())
+                if (Room != null)
+                {
+                    if (Cars.Any())
+                    {
+                        decimal carsSum = Cars.Sum(c => c.PricePerDay) * CountNights;
+                        return carsSum + (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
+                    }
+                    return (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
+                }
+                else 
                 {
                     decimal carsSum = Cars.Sum(c => c.PricePerDay) * CountNights;
-                    return carsSum + (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
+                    return carsSum;
                 }
-                return (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
             }
         }
     }

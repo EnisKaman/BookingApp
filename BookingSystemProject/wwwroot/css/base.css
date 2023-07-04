@@ -1,9 +1,9 @@
 ﻿*,
 *::before,
 *::after {
-    outline: none;
-    padding: 0px;
-    margin: 0px;
+  outline: none;
+  padding: 0px;
+  margin: 0px;
 }
 body{
     margin: 0px;
@@ -12,6 +12,26 @@ header {
   background-color: darkblue;
   padding: 25px 2.2rem;
   font-family: 'Paytone One', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.5rem 3rem;
+  width: 100%;
+  z-index: 100;
+}
+
+.sticky {
+  background-color: white;
+  width: 100%;
+  margin-right: 1rem;
+}
+
+.sticky #logo, .sticky #logo2, .sticky #menu-btn {
+  color: black;
+}
+
+.sticky .navigation .nav-list li a {
+  color: black;
 }
 
 .navigation {

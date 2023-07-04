@@ -27,7 +27,7 @@
     <Content Update="wwwroot\img\Booking project register-background img.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\js\site.js">
+    <Content Update="wwwroot\js\base.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\pexels-tom-fisk-3546903-3840x2160-30fps.mp4">

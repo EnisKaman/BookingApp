@@ -30,7 +30,7 @@
             }
             ViewData["SelectedOption"] = selectedOption;
 
-            IEnumerable<CarAllViewModel> cars = await carService.GetAllAsync(selectedOption);
+            IEnumerable<CarViewModel> cars = await carService.GetAllAsync(selectedOption);
             Pager pager = new Pager(cars.Count(), pg);
             if (pg > pager.TotalPages)
             {

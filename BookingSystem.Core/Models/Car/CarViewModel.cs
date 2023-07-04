@@ -2,7 +2,7 @@
 {
     public class CarViewModel
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string MakeType { get; set; } = null!;
         public string Model { get; set; } = null!;
         public int Year { get; set; }

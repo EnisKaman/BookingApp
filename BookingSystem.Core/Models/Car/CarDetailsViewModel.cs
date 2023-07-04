@@ -2,7 +2,7 @@
 {
     using Infrastructure.Data.enums;
     using System.ComponentModel.DataAnnotations;
-    public class CarDetailsViewModel :  CarAllViewModel
+    public class CarDetailsViewModel :  CarViewModel
     {
         [Display(Name = "Count Doors")]
         public int DoorsCount { get;set; }
