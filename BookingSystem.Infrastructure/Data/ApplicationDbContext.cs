@@ -26,6 +26,8 @@
         public DbSet<FavoriteHotel> FavoriteHotels { get; set; } = null!;
         public DbSet<RoomPackage> RoomPackages { get; set; } = null!;
         public DbSet<RoomsBases> RoomsBases { get; set; } = null!;
+        public DbSet<RoomReservations> RoomsReservations { get; set; } = null!;
+        public DbSet<RentCarReservations> RentCarReservations { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,6 +47,8 @@
             builder.ApplyConfiguration(new RoomEntityConfiguration());
             builder.ApplyConfiguration(new RoomBasesConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
+            builder.ApplyConfiguration(new RoomsReservationConfiguration());
+            builder.ApplyConfiguration(new RentCarReservationConfiguration());
 
             base.OnModelCreating(builder);
         }

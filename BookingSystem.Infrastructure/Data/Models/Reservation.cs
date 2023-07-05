@@ -7,19 +7,17 @@
     {
         public Reservation()
         {
-            Cars = new List<RentCar>();
-            Id = Guid.NewGuid();
+            RentCarReservations = new List<RentCarReservations>();
+            RoomReservations = new List<RoomReservations>();
         }
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [ForeignKey(nameof(Room))]
-        public int RoomId { get; set; }
-        public Room Room { get; set; } = null!;
-        public Hotel Hotel { get; set; } = null!;
+         public ICollection<RoomReservations> RoomReservations { get; set; }
         public int CountNights { get; set; }
+        public int? HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
         public int PeopleCount { get; set; }
-        [Required]
-        public ICollection<RentCar> Cars { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         [Required]
@@ -35,28 +33,9 @@
         [Required]
         public Guid UserId { get; set; }
         public User User { get; set; } = null!;
-
+        public ICollection<RentCarReservations> RentCarReservations { get; set; }
         [NotMapped]
-        public decimal TotalPrice
-        {
-            get
-            {
-                if (Room != null)
-                {
-                    if (Cars.Any())
-                    {
-                        decimal carsSum = Cars.Sum(c => c.PricePerDay) * CountNights;
-                        return carsSum + (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
-                    }
-                    return (CountNights * Room.PricePerNight) + Room.Package.Price * PeopleCount;
-                }
-                else 
-                {
-                    decimal carsSum = Cars.Sum(c => c.PricePerDay) * CountNights;
-                    return carsSum;
-                }
-            }
-        }
+        public decimal TotalPrice { get; set; }
     }
 }
 

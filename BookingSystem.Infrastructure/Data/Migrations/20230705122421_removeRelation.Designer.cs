@@ -4,6 +4,7 @@ using BookingSystemProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230705122421_removeRelation")]
+    partial class removeRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1472,9 +1474,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("HotelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -1490,8 +1489,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("HotelId");
 
                     b.HasIndex("UserId");
 
@@ -2907,17 +2904,11 @@ namespace BookingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Reservation", b =>
                 {
-                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotel", "Hotel")
-                        .WithMany("Reservations")
-                        .HasForeignKey("HotelId");
-
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.User", "User")
                         .WithMany("Reservations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Hotel");
 
                     b.Navigation("User");
                 });
@@ -3050,8 +3041,6 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Navigation("HotelBenefits");
 
                     b.Navigation("Pictures");
-
-                    b.Navigation("Reservations");
 
                     b.Navigation("Rooms");
                 });

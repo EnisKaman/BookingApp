@@ -9,6 +9,7 @@
         public RentCar()
         {
             IsAvailable = true;
+            RentCarReservations = new List<RentCarReservations>();
         }
         [Key]
         public int Id { get; set; }
@@ -35,9 +36,6 @@
         [Column(TypeName = "decimal(17, 15)")]
         public decimal Lattitude { get; set; }
         public decimal PricePerDay { get; set; }
-
-        [ForeignKey(nameof(Reservation))]
-        public Guid? ReservationId { get; set; }
-        public Reservation? Reservation { get; set; }
+        public ICollection<RentCarReservations> RentCarReservations { get; set; }
     }
 }

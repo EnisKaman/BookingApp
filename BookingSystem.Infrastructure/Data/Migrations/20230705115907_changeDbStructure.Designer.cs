@@ -4,6 +4,7 @@ using BookingSystemProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230705115907_changeDbStructure")]
+    partial class changeDbStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1301,7 +1303,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            CarImg = "/img/Cars/BmwX6 Black.jpg",
+                            CarImg = "/img/Cars/BmwX6 Black.jpeg",
                             DoorsCount = 4,
                             FuelCapacity = 85.0,
                             FuelConsumption = 13.4,
@@ -1320,7 +1322,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            CarImg = "/img/Cars/Bmw X6 2021 Maroon.jpg",
+                            CarImg = "/img/Cars/BmwX6 2021 Maroon.jpg",
                             DoorsCount = 4,
                             FuelCapacity = 85.0,
                             FuelConsumption = 13.4,
@@ -2907,7 +2909,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Reservation", b =>
                 {
-                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotel", "Hotel")
+                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotel", null)
                         .WithMany("Reservations")
                         .HasForeignKey("HotelId");
 
@@ -2916,8 +2918,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Hotel");
 
                     b.Navigation("User");
                 });

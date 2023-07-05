@@ -19,6 +19,7 @@
         public async Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync()
         {
             IEnumerable<HotelCardViewModel> hotels = await bookingContext.Hotels.
+                Include(h => h.Reservations).
                 OrderByDescending(h => h.Reservations.Count)
                 .ThenByDescending(h => h.StarRating)
                  .Select(h => new HotelCardViewModel()

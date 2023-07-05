@@ -17,12 +17,13 @@ a,
 li,
 table
 {
-    font-family: 'Paytone One', sans-serif;
+   font-family: 'Paytone One', sans-serif;
 }
 .main-container{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-top: 4.5rem;
 }
 .main-section{
   display: flex;

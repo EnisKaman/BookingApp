@@ -4,14 +4,19 @@
     using static Common.EntityValidation.UserEntity;
     public class UserViewModel
     {
-        public Guid Id { get; init; }
+        public Guid Id { get; set; }
         public string Email { get; init; } = null!;
         [Phone]
         [MaxLength(PhoneNumberMaxLength)]
-        public string PhoneNumber { get; set; }
+        [Display(Name = "Phone Number")]
+        public string? PhoneNumber { get; set; }
         [StringLength(FirstNameMaxValue, MinimumLength = FirstNameMinValue)]
-        public string FirstName { get; set; }
-        [StringLength(LastNameMaxValue, MinimumLength = LastNameMaxValue)]
-        public string LastName { get; set; }
+        [Display(Name = "First Name")]
+        [Required]
+        public string FirstName { get; set; } = null!;
+        [StringLength(LastNameMaxValue, MinimumLength = LastNameMinValue)]
+        [Display(Name = "Last Name")]
+        [Required]
+        public string LastName { get; set; } = null!;
     }
 }

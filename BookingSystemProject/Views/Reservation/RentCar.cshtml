@@ -21,8 +21,8 @@
             <span asp-validation-for="@Model.User.LastName"></span>
         </div>
         <div class="input-container">
-            <label asp-for="@Model.User.PhoneNumber>Phone Number</label>
-        <input type=" text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
+            <label asp-for="@Model.User.PhoneNumber>Phone Number">Phone Number</label>
+             <input type="text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
             <span asp-validation-for="@Model.User.PhoneNumber"></span>
         </div>
         <div class="input-container">
@@ -33,13 +33,16 @@
             <label asp-for="@Model.StartRentDate">Start Date</label>
             <input type="date" asp-for="@Model.StartRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" 
             value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+            <span asp-validation-for="@Model.StartRentDate"></span>
         </div>
          <div class="input-container">
             <label asp-for="@Model.StartRentDate">End Date</label>
             <input type="date" asp-for="@Model.EndRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
                    value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+           <span asp-validation-for="@Model.EndRentDate"></span>
          </div>
         <button class="rent-btn" type="submit">Rent</button>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
     </form>
     <section class="order-info">
         <h2 class="order-title">@Model.CarlViewModel.MakeType @Model.CarlViewModel.Model</h2>
@@ -53,6 +56,7 @@
          <p class="price">Price per day: @Model.CarlViewModel.PricePerDay$</p>
     </section>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
