@@ -21,9 +21,9 @@ input,
 span{
   font-family: 'Paytone One', sans-serif;
 }
-
 main {
   margin: 9rem 5rem 2rem 5rem;
+  max-width: 1900px;
 }
 .title{
   font-size: 2rem;

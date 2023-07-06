@@ -20,9 +20,9 @@
                 .Include(rc => rc.Reservations)
                 .FirstAsync(rc => rc.Id == carId);
             return carToFind.Reservations.Any(r => r.StartDate <= startDate && r.EndDate >= endDate 
-            || (r.StartDate >=startDate && r.EndDate <=endDate) ||r.EndDate == startDate);
+            || (r.StartDate >=startDate && r.EndDate <=endDate) ||r.EndDate == startDate 
+            || r.StartDate == endDate || r.StartDate >=startDate && r.EndDate >= startDate);
         }
-
         public async Task RentCarAsync(int carId, RentCarReservationViewModel model)
         {
             RentCar carToRent = await bookingContext.RentCars.FirstAsync(rc => rc.Id == carId);

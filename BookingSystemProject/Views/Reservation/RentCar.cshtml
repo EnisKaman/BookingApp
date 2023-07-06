@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css//Reservation/Responsive/ReservationCar.css" asp-append-version="true" />
 
 <h1 class="title">Complete your rent</h1>
 <div class="order-container">
@@ -52,8 +53,8 @@
         <hr />
         <p class="model-year">Model Year: @Model.CarlViewModel.Year</p>
         <p class="location">Location:<i class="fa-solid fa-location-dot"></i> @Model.CarlViewModel.Location</p>
-         <hr />
          <p class="price">Price per day: @Model.CarlViewModel.PricePerDay$</p>
+         <hr />
          <p class="price total-price"></p>
     </section>
 </div>
