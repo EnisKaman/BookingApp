@@ -5,6 +5,8 @@
     using Core.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using static BookingSystem.Common.NotificationKeys;
+    using static BookingSystem.Common.NotificationMessages;
 
     [Authorize]
     public class ReservationController : Controller
@@ -24,7 +26,8 @@
         {
             if (!await carService.IsCarExistAsync(id))
             {
-                return NotFound();
+                TempData[ErrorMessage] = CarDoesNotExist;
+                return RedirectToAction("All", "Car");
             }
             RentCarReservationViewModel rentCarReservation = new RentCarReservationViewModel();
             rentCarReservation.CarlViewModel = await carService.GetOrderCarAsync(id);
@@ -40,14 +43,20 @@
             {
                 return View(model);
             }
+            if(!await carService.IsCarExistAsync(id))
+            {
+                TempData[ErrorMessage] = CarDoesNotExist;
+                return RedirectToAction("All", "Car");
+            }
             if (await reservationService.CheckCarIsAlreadyReservedAsync(id, model.StartRentDate, model.EndRentDate))
             {
-                ModelState.AddModelError("", "The car is already reserved for this period");
+                TempData[ErrorMessage] = string.Format(CarIsAlreadyRentedInThisPeriodMsg,model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
                 return View(model);
             }
             try
             {
                 await reservationService.RentCarAsync(id, model);
+                TempData[SuccessMessage] = string.Format(SuccessfullRentCarMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
                 return RedirectToAction("All", "Car");
             }
             catch (Exception)

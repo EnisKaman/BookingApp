@@ -9,7 +9,7 @@
         {
             Pictures = new List<Picture>();
             RoomBases = new List<RoomsBases>();
-            RoomReservations = new List<RoomReservations>();
+            Reservations = new List<Reservation>();
             PackageId = 1;
         }
         [Key]
@@ -31,7 +31,7 @@
         public decimal PricePerNight { get; set; }
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<RoomsBases> RoomBases { get; set; }
-        public ICollection<RoomReservations> RoomReservations { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

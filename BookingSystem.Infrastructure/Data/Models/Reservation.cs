@@ -5,19 +5,18 @@
     using static Common.EntityValidation.ReservationEntity;
     public class Reservation
     {
-        public Reservation()
-        {
-            RentCarReservations = new List<RentCarReservations>();
-            RoomReservations = new List<RoomReservations>();
-        }
         [Key]
         public int Id { get; set; }
-        [ForeignKey(nameof(Room))]
-         public ICollection<RoomReservations> RoomReservations { get; set; }
         public int CountNights { get; set; }
+        [ForeignKey(nameof(Room))]
+        public int? RoomId { get; set; }
+        public Room? Room { get; set; }
         public int? HotelId { get; set; }
         public Hotel? Hotel { get; set; }
         public int PeopleCount { get; set; }
+        [ForeignKey(nameof(RentCar))]
+        public int? RentCarId { get; set; }
+        public RentCar? RentCar { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         [Required]
@@ -33,8 +32,6 @@
         [Required]
         public Guid UserId { get; set; }
         public User User { get; set; } = null!;
-        public ICollection<RentCarReservations> RentCarReservations { get; set; }
-        [NotMapped]
         public decimal TotalPrice { get; set; }
     }
 }

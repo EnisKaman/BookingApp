@@ -9,6 +9,9 @@
     {
         public void Configure(EntityTypeBuilder<RentCar> builder)
         {
+            builder.HasMany(rc => rc.Reservations)
+                .WithOne(r => r.RentCar)
+                .OnDelete(DeleteBehavior.NoAction);
             ICollection<RentCar> cars = CreateCars();
             builder.HasData(cars);
         }

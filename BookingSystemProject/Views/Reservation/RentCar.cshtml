@@ -31,13 +31,13 @@
         </div>
         <div class="input-container">
             <label asp-for="@Model.StartRentDate">Start Date</label>
-            <input type="date" asp-for="@Model.StartRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" 
+            <input type="date" asp-for="@Model.StartRentDate" class="start-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" 
             value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
             <span asp-validation-for="@Model.StartRentDate"></span>
         </div>
          <div class="input-container">
             <label asp-for="@Model.StartRentDate">End Date</label>
-            <input type="date" asp-for="@Model.EndRentDate" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+            <input type="date" asp-for="@Model.EndRentDate" class="end-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
                    value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
            <span asp-validation-for="@Model.EndRentDate"></span>
          </div>
@@ -54,6 +54,7 @@
         <p class="location">Location:<i class="fa-solid fa-location-dot"></i> @Model.CarlViewModel.Location</p>
          <hr />
          <p class="price">Price per day: @Model.CarlViewModel.PricePerDay$</p>
+         <p class="price total-price"></p>
     </section>
 </div>
 
@@ -61,4 +62,25 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<script>
+   const endDataInputElement = document.querySelector(".end-date");
+   const startDateInputElement = document.querySelector(".start-date");
+   endDataInputElement.addEventListener('change', () =>{
+       if(startDateInputElement.value >=endDataInputElement.value){
+           document.querySelector(".order-info .total-price").textContent = '';
+           return;
+       }
+       let pricePerDay = '@Model.CarlViewModel.PricePerDay';
+       let endDate = new Date(endDataInputElement.value);
+       let startDate = new Date(startDateInputElement.value);
+       // return the difference in milliseconds
+       let difference = endDate.getTime() - startDate.getTime();
+       //convert milliseconds to days (1000 = total milliseconds in second, 3600 = total seconds in hour, 24 = total hours per day)
+       let dayDifference = Math.ceil(difference/(1000 * 3600 * 24));
+       let totalPrice = pricePerDay * dayDifference;
+       document.querySelector(".order-info .total-price").textContent = `Total Price: ${totalPrice.toFixed(2)}$`;
+       
+   });
+</script>
+
   

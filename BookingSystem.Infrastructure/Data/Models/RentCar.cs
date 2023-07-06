@@ -8,8 +8,7 @@
     {
         public RentCar()
         {
-            IsAvailable = true;
-            RentCarReservations = new List<RentCarReservations>();
+            Reservations = new List<Reservation>();
         }
         [Key]
         public int Id { get; set; }
@@ -28,7 +27,6 @@
         public int PeopleCapacity { get; set; }
         public TransmissionType TransmissionType { get; set; }
         public bool IsDeleted { get; set; }
-        public bool IsAvailable { get; set; }
         [Required]
         public string Location { get; set; } = null!;
         [Column(TypeName = "decimal(17, 15)")]
@@ -36,6 +34,6 @@
         [Column(TypeName = "decimal(17, 15)")]
         public decimal Lattitude { get; set; }
         public decimal PricePerDay { get; set; }
-        public ICollection<RentCarReservations> RentCarReservations { get; set; }
+        public IEnumerable<Reservation> Reservations { get; set; }
     }
 }

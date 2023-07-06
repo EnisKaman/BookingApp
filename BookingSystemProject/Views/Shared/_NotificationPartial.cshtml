@@ -1,0 +1,15 @@
+﻿@using static BookingSystem.Common.NotificationKeys;
+@if(TempData.ContainsKey(ErrorMessage))
+{
+    <script>toastr.error('@TempData[ErrorMessage]');</script>
+}
+@if(TempData.ContainsKey(SuccessMessage))
+{
+    <script>toastr.success('@TempData[SuccessMessage]')</script>
+}
+@*To load JQuery*@
+@section Scripts
+{
+
+    <partial name="_ValidationScriptsPartial" />
+}

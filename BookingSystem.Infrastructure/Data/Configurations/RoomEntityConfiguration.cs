@@ -11,6 +11,9 @@
             builder.HasOne(r => r.RoomType)
                 .WithMany(rt => rt.Rooms)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(r => r.Reservations)
+                .WithOne(r => r.Room)
+                .OnDelete(DeleteBehavior.NoAction);
             ICollection<Room> rooms = CreateRooms();
             builder.HasData(rooms);
         }

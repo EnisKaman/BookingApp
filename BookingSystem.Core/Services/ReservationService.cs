@@ -16,10 +16,11 @@
 
         public async Task<bool> CheckCarIsAlreadyReservedAsync(int carId, DateTime startDate, DateTime endDate)
         {
-            return await bookingContext.RentCarReservations
-                .Where(rc => rc.RentCarId == carId)
-                .AnyAsync(rc => rc.Reservation.StartDate <= startDate
-            && rc.Reservation.EndDate >= endDate);
+            RentCar carToFind = await bookingContext.RentCars
+                .Include(rc => rc.Reservations)
+                .FirstAsync(rc => rc.Id == carId);
+            return carToFind.Reservations.Any(r => r.StartDate <= startDate && r.EndDate >= endDate 
+            || (r.StartDate >=startDate && r.EndDate <=endDate) ||r.EndDate == startDate);
         }
 
         public async Task RentCarAsync(int carId, RentCarReservationViewModel model)
@@ -36,10 +37,11 @@
                 FirstName = model.User.FirstName,
                 LastName = model.User.LastName,
                 CountNights = countDays,
+                RentCarId = carId,
                 TotalPrice = model.CarlViewModel.PricePerDay * countDays,
                 PeopleCount = 1,
             };
-            await bookingContext.RentCarReservations.AddAsync(new RentCarReservations() { RentCar = carToRent,Reservation = reservation });
+            await bookingContext.Reservations.AddAsync(reservation);
             await bookingContext.SaveChangesAsync();
         }
     }
