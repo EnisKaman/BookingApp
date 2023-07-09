@@ -1,21 +1,5 @@
-﻿@using BookingSystem.Core.Models.Ordering
-@using BookingSystem.Core.Models.Page;
-@model IEnumerable<CarViewModel>
-
-@{
-
-    Pager pager = new Pager();
-    int pageNumber = 0;
-    if (ViewBag.Pager != null)
-    {
-        pager = (Pager)ViewBag.Pager;
-        pageNumber = pager.CurrentPage;
-    }
-    var parameters = new Dictionary<string, string>()
-    {
-        {"sort", (string)ViewData["SelectedOption"] ?? "default"}
-    };
-}
+﻿@using BookingSystem.Core.Models.Page;
+@model CarQuerViewModel
 
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/CarStyle/CarAll.css" asp-append-version="true" />
@@ -53,20 +37,16 @@
         </div>
     </div>
 </section>
-<form method="post" asp-controller="Car" asp-action="All" class="form-container">
+<form method="get" class="form-container">
     <p><i class="fa-solid fa-arrow-up-wide-short"></i>Sort By</p>
-    <select asp-for="@ViewData["SelectedOption"]" name="selectedOption" id="selectedOption">
-        @{
-            SelectViewModel selectViewModel = (SelectViewModel)ViewData["Options"];
-            if (selectViewModel != null)
-            {
-
-                @foreach (var option in selectViewModel.Options)
-                {
-                    <option value="@option.Value">@option.Text</option>
-                }
-            }
-        }
+    <select id="selectedOption" asp-for="@Model.CarSortOption">
+        <option value="0">Default</option>
+        <option value="1">Price Ascending</option>
+        <option value="2">Price Descending</option>
+        <option value="3">Year Ascending</option>
+        <option value="4">Year Descending</option>
+        <option value="5">Make Type Ascending</option>
+        <option value="6">Make Type Descending</option>
     </select>
     <button type="submit">Sort</button>
 </form>
@@ -74,7 +54,7 @@
     <h1 class="title">Our Offers</h1>
     @* May become partial view*@
     <div class="cars-container">
-        @foreach (CarViewModel car in Model)
+        @foreach (CarViewModel car in Model.Cars)
         {
             <div class="card">
                 <div class="car-img-container">
@@ -93,36 +73,27 @@
     </div>
 </section>
 <div class="pagination-container">
-    @if (pager.TotalPages > 0)
+    @if (Model.Pager.TotalPages > 0)
     {
         <ul class="page-list">
-            @if (pager.CurrentPage > pager.StartPage)
+            @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-pg="@(pager.CurrentPage - 1)" asp-route-sort="@((string)ViewData["SelectedOption"])">Previous</a>
+                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-currentPage="@(Model.Pager.CurrentPage - 1)" asp-route-carSortOption="@((int)Model.CarSortOption)">Previous</a>
                 </li>
             }
-            @for (int page = pager.StartPage; page <= pager.EndPage; page++)
+            @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
             {
                 <li class="page-item">
-                    <a class="page-link @(page == pager.CurrentPage ? "active": "")" asp-controller="Car" asp-action="All" asp-route-pg="@(page)" asp-route-sort="@((string)ViewData["SelectedOption"])">@(page)</a>
+                    <a class="page-link @(page == Model.Pager.CurrentPage ? "active": "")" asp-controller="Car" asp-action="All" asp-route-currentPage="@(page)" asp-route-carSortOption="@((int)Model.CarSortOption)">@(page)</a>
                 </li>
             }
-            @if(pager.CurrentPage < pager.EndPage)
+            @if(Model.Pager.CurrentPage < Model.Pager.EndPage)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-pg="@(pager.CurrentPage + 1)" asp-route-sort="@((string)ViewData["SelectedOption"])">Next</a>
+                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-currentPage="@(Model.Pager.CurrentPage + 1)" asp-route-carSortOption="@((int)Model.CarSortOption)">Next</a>
                 </li>
             }
         </ul>
     }
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const selectedOption = "@ViewData["SelectedOption"]";
-        const selectElement = document.getElementById("selectedOption");
-        selectElement.value = selectedOption;
-    });
-
-</script>

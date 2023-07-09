@@ -39,8 +39,6 @@
             var result = await userManager.CreateAsync(user, registerViewModel.Password);
             if (result.Succeeded)
             {
-                //var userNameClaim = new Claim("username", registerViewModel.Username);
-                //await userManager.AddClaimAsync(user, userNameClaim);
                 return RedirectToAction(nameof(Login));
             }
             foreach (var error in result.Errors)
