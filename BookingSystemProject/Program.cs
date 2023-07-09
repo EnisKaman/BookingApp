@@ -27,6 +27,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Home/Index";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(48.60);
 });
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.Cookie.HttpOnly = true; 
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<ICarService, CarService>();
@@ -54,6 +59,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

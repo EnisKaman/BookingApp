@@ -1,9 +1,8 @@
 ﻿namespace BookingSystem.Core.Services
 {
-    using BookingSystem.Core.Models.Car.Enums;
-    using BookingSystem.Core.Models.Page;
-    using BookingSystem.Infrastructure.Data.enums;
-    using BookingSystem.Infrastructure.Data.Models;
+    using Models.Car.Enums;
+    using Infrastructure.Data.enums;
+    using Infrastructure.Data.Models;
     using BookingSystemProject.Data;
     using Core.Contracts;
     using Core.Models.Car;
@@ -59,7 +58,6 @@
                 }).ToArrayAsync();
             return cars;
         }
-
         public async Task<CarViewModel> GetOrderCarAsync(int carId)
         {
             CarViewModel carToGet = await bookingContext.RentCars
@@ -79,6 +77,54 @@
         public async Task<AllCarsSortedAndFilteredDataModel> AllCarsSortedAndFilteredDataModelAsync(CarQuerViewModel carQuerViewModel)
         {
             IQueryable<RentCar> cars = bookingContext.RentCars.AsQueryable();
+            cars = FilterCars(carQuerViewModel, cars);
+            int recordsToSkip = (carQuerViewModel.Pager.CurrentPage - 1) * carQuerViewModel.Pager.PageSize;
+            IEnumerable<CarViewModel> carViewModels = await cars
+                .Skip(recordsToSkip).Take(carQuerViewModel.Pager.PageSize)
+                .Select(rc => new CarViewModel()
+                {
+                    Id = rc.Id,
+                    CarImg = rc.CarImg,
+                    Location = rc.Location,
+                    MakeType = rc.MakeType,
+                    Model = rc.ModelType,
+                    PricePerDay = rc.PricePerDay,
+                    Year = rc.Year
+
+                }).ToArrayAsync();
+            return new AllCarsSortedAndFilteredDataModel()
+            {
+                Cars = carViewModels
+            };
+        }
+
+        private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
+        {
+            if (carQuerViewModel.DoorsCount.HasValue)
+            {
+                cars = cars.Where(rc => rc.DoorsCount >= carQuerViewModel.DoorsCount);
+            }
+            if (carQuerViewModel.MinPrice.HasValue)
+            {
+                cars = cars.Where(rc => rc.PricePerDay >= carQuerViewModel.MinPrice);
+            }
+            if (carQuerViewModel.MaxPrice.HasValue)
+            {
+                cars = cars.Where(rc => rc.PricePerDay <= carQuerViewModel.MaxPrice);
+            }
+            if (carQuerViewModel.MinYear.HasValue)
+            {
+                cars = cars.Where(rc => rc.Year >= carQuerViewModel.MinYear);
+            }
+            if (carQuerViewModel.MaxYear.HasValue)
+            {
+                cars = cars.Where(rc => rc.Year <= carQuerViewModel.MaxYear);
+            }
+            if (!string.IsNullOrWhiteSpace(carQuerViewModel.Brand))
+            {
+                cars = cars.Where(rc => rc.MakeType.ToLower() == carQuerViewModel.Brand.ToLower());
+            }
+
             if (carQuerViewModel.CarSortOption == CarSortOption.YearAscending)
             {
                 cars = cars.OrderBy(rc => rc.Year);
@@ -107,29 +153,23 @@
             {
                 cars = cars.OrderBy(rc => rc.Id);
             }
-            int recordsToSkip = (carQuerViewModel.Pager.CurrentPage - 1) * carQuerViewModel.Pager.PageSize;
-            IEnumerable<CarViewModel> carViewModels = await cars
-                .Skip(recordsToSkip).Take(carQuerViewModel.Pager.PageSize)
-                .Select(rc => new CarViewModel()
-                {
-                    Id = rc.Id,
-                    CarImg = rc.CarImg,
-                    Location = rc.Location,
-                    MakeType = rc.MakeType,
-                    Model = rc.ModelType,
-                    PricePerDay = rc.PricePerDay,
-                    Year = rc.Year
 
-                }).ToArrayAsync();
-            return new AllCarsSortedAndFilteredDataModel()
-            {
-                Cars = carViewModels
-            };
+            return cars;
         }
 
-        public async Task<int> GetCarsCountAsync()
+        public async Task<int> GetCarsCountAsync(CarQuerViewModel model)
         {
-           return await bookingContext.RentCars.CountAsync();
+            IQueryable<RentCar> cars = bookingContext.RentCars.AsQueryable();
+            cars = FilterCars(model, cars);
+
+            return await cars.CountAsync();
+        }
+
+        public async Task<IEnumerable<string>> GetAllBrandsAsync()
+        {
+            IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
+                .ToArrayAsync();
+            return brands;
         }
     }
 }

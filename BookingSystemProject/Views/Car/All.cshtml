@@ -48,7 +48,52 @@
         <option value="5">Make Type Ascending</option>
         <option value="6">Make Type Descending</option>
     </select>
+    <input type="hidden" name="doorsCount" value="@Model.DoorsCount" />
+    <input type="hidden" name="minYear" value="@Model.MinYear" />
+    <input type="hidden" name="maxYear" value="@Model.MaxYear" />
+    <input type="hidden" name="minPrice" value="@Model.MinPrice" />
+    <input type="hidden" name="maxPrice" value="@Model.MaxPrice" />
+    <input type="hidden" name="brand" value="@Model.Brand" />
     <button type="submit">Sort</button>
+</form>
+
+<form method="get" class="filter-container" asp-controller="Car" asp-action="All">
+    <div class="title-container">
+        <img class="filter-img" src="~/img/FilterIcon.png" />
+        <h3 class="filter-title"> Filters</h3>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.DoorsCount">Doors count</label>
+        <input asp-for="@Model.DoorsCount" type="number"></>
+        <input type="hidden" name="doorsCount" value="@Model.DoorsCount" />
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MinYear">Start Year</label>
+        <input asp-for="@Model.MinYear" type="number"></>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MaxYear">End Year</label>
+        <input asp-for="@Model.MaxYear" type="number"></>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MinPrice">Min Price</label>
+        <input asp-for="@Model.MinPrice" type="number"></>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MaxPrice">Max Price</label>
+        <input asp-for="@Model.MaxPrice" type="number"></>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.Brand">Brand</label>
+        <select asp-for="@Model.Brand">
+            @foreach (string brand in Model.Brands)
+            {
+                <option value="@brand">@brand</option>
+            }
+        </select>
+    </div>
+    <input type="hidden" name="carSortOption" value="@Model.CarSortOption" />
+    <button type="submit" class="filter-btn">Filter</button>
 </form>
 <section class="cars">
     <h1 class="title">Our Offers</h1>
@@ -73,25 +118,62 @@
     </div>
 </section>
 <div class="pagination-container">
-    @if (Model.Pager.TotalPages > 0)
+    @if (Model.Pager.TotalPages > 0 && Model.Cars.Any())
     {
         <ul class="page-list">
             @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-currentPage="@(Model.Pager.CurrentPage - 1)" asp-route-carSortOption="@((int)Model.CarSortOption)">Previous</a>
+                    <a class="page-link"
+               href="@Url.Action("All", "Car", new
+                {
+                    currentPage = Model.Pager.CurrentPage - 1,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">Previous</a>
                 </li>
             }
             @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
             {
+                if(Model.Cars.Count() < Model.Pager.PageSize)
+                {
+                    break;
+                }
                 <li class="page-item">
-                    <a class="page-link @(page == Model.Pager.CurrentPage ? "active": "")" asp-controller="Car" asp-action="All" asp-route-currentPage="@(page)" asp-route-carSortOption="@((int)Model.CarSortOption)">@(page)</a>
+                <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+               href="@Url.Action("All", "Car", new
+                {
+                    currentPage = page,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">@(page)</a>
                 </li>
             }
-            @if(Model.Pager.CurrentPage < Model.Pager.EndPage)
+            @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="Car" asp-action="All" asp-route-currentPage="@(Model.Pager.CurrentPage + 1)" asp-route-carSortOption="@((int)Model.CarSortOption)">Next</a>
+                    <a class="page-link"
+               href="@Url.Action("All", "Car", new
+                {
+                    currentPage = Model.Pager.CurrentPage + 1,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">Next</a>
                 </li>
             }
         </ul>

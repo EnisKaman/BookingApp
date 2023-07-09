@@ -4,6 +4,8 @@
     using Core.Contracts;
     using Core.Models.Car;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
+
     public class CarController : Controller
     {
         private readonly ICarService carService;
@@ -18,12 +20,11 @@
             {
                 carQuerViewModel.CurrentPage = 1;
             }
-            Pager pager = new Pager(await carService.GetCarsCountAsync(), carQuerViewModel.CurrentPage);
-
+            Pager pager = new Pager(await carService.GetCarsCountAsync(carQuerViewModel), carQuerViewModel.CurrentPage);
             carQuerViewModel.Pager = pager;
             AllCarsSortedAndFilteredDataModel allCarsSortedAndFilteredDataModel = await carService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
             carQuerViewModel.Cars = allCarsSortedAndFilteredDataModel.Cars;
-
+            carQuerViewModel.Brands = await carService.GetAllBrandsAsync();
             return View(carQuerViewModel);
         }
         [HttpGet]

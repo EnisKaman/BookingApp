@@ -12,7 +12,8 @@ h4,
 h5,
 h6,
 a,
-li
+li,
+label
 {
    font-family: 'Paytone One', sans-serif;
 }
@@ -146,11 +147,12 @@ header {
   font-size: 1.2rem;
   margin-right: 0.4rem;
 }
-.form-container{
+.form-container, .filter-container{
    padding: 0rem 4rem;
+   margin-bottom: 2.8rem;
 }
-.form-container p {
-  font-size: 1.2rem;
+.form-container p, .filter-title{
+  font-size: 1.4rem;
 }
 
 .form-container select{
@@ -199,3 +201,36 @@ header {
 .page-list .page-link:hover{
    opacity: 0.5;
 }
+.filter-img {
+  height: 20px;
+  object-fit: cover;
+}
+.title-container{
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.filter-container .container{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+} 
+.filter-container .container input, .filter-container .container select{
+  padding: 0.3rem 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.filter-btn{
+  margin-top: 1.1rem;
+  font-size: 1.1rem;
+  padding: 8px 14px;
+  background-color: #7962ba;
+  color: white;
+  transition: 0.5s all ease;
+  border: none;
+  border-radius: 4px;
+  width: 100px;
+}
+.filter-btn:hover{
+  opacity: 0.7;
+}
+

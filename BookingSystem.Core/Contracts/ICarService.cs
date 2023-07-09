@@ -8,6 +8,7 @@
         Task<CarDetailsViewModel> FindCarByIdAsync(int carId);
         Task<IEnumerable<CarBrandViewModel>> GetCarsByBrandAsync(string brand, int carId);
         Task<CarViewModel> GetOrderCarAsync(int carId);
-        Task<int> GetCarsCountAsync();
+        Task<int> GetCarsCountAsync(CarQuerViewModel carQuerViewModel);
+        Task<IEnumerable<string>> GetAllBrandsAsync();
     }
 }
