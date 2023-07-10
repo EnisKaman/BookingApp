@@ -6,7 +6,7 @@
 
     public class RentCarReservationViewModel: IValidatableObject
     {
-        public UserViewModel User { get; set; }
+        public UserViewModel User { get; set; } = null!;
         public CarViewModel? CarlViewModel { get; set; }
         public DateTime StartRentDate { get; set; }
         public DateTime EndRentDate { get; set; }

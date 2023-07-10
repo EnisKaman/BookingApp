@@ -65,23 +65,28 @@
     <div class="container">
         <label asp-for="@Model.DoorsCount">Doors count</label>
         <input asp-for="@Model.DoorsCount" type="number"></>
+        <span asp-validation-for="@Model.DoorsCount"></span>
         <input type="hidden" name="doorsCount" value="@Model.DoorsCount" />
     </div>
     <div class="container">
         <label asp-for="@Model.MinYear">Start Year</label>
         <input asp-for="@Model.MinYear" type="number"></>
+        <span asp-validation-for="@Model.MinYear"></span>
     </div>
     <div class="container">
         <label asp-for="@Model.MaxYear">End Year</label>
         <input asp-for="@Model.MaxYear" type="number"></>
+        <span asp-validation-for="@Model.MaxYear"></span>
     </div>
     <div class="container">
         <label asp-for="@Model.MinPrice">Min Price</label>
         <input asp-for="@Model.MinPrice" type="number"></>
+        <span asp-validation-for="@Model.MinPrice"></span>
     </div>
     <div class="container">
         <label asp-for="@Model.MaxPrice">Max Price</label>
         <input asp-for="@Model.MaxPrice" type="number"></>
+        <span asp-validation-for="@Model.MaxPrice"></span>
     </div>
     <div class="container">
         <label asp-for="@Model.Brand">Brand</label>
@@ -90,13 +95,21 @@
             {
                 <option value="@brand">@brand</option>
             }
+            <option value="default">All</option>
         </select>
     </div>
     <input type="hidden" name="carSortOption" value="@Model.CarSortOption" />
     <button type="submit" class="filter-btn">Filter</button>
 </form>
 <section class="cars">
-    <h1 class="title">Our Offers</h1>
+    @if (!Model.Cars.Any())
+    {
+        <h1 class="title">no matches found</h1>
+    }
+    else
+    {
+        <h1 class="title">Our Offers</h1>
+    }
     @* May become partial view*@
     <div class="cars-container">
         @foreach (CarViewModel car in Model.Cars)
@@ -118,7 +131,7 @@
     </div>
 </section>
 <div class="pagination-container">
-    @if (Model.Pager.TotalPages > 0 && Model.Cars.Any())
+    @if (Model.Pager.TotalPages > 0)
     {
         <ul class="page-list">
             @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
@@ -140,12 +153,8 @@
             }
             @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
             {
-                if(Model.Cars.Count() < Model.Pager.PageSize)
-                {
-                    break;
-                }
                 <li class="page-item">
-                <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+                    <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
                href="@Url.Action("All", "Car", new
                 {
                     currentPage = page,
@@ -179,3 +188,4 @@
         </ul>
     }
 </div>
+<script src="~/js/account.js"></script>

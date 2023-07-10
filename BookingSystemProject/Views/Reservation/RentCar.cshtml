@@ -23,7 +23,7 @@
         </div>
         <div class="input-container">
             <label asp-for="@Model.User.PhoneNumber>Phone Number">Phone Number</label>
-             <input type="text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
+            <input type="text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
             <span asp-validation-for="@Model.User.PhoneNumber"></span>
         </div>
         <div class="input-container">
@@ -39,7 +39,7 @@
          <div class="input-container">
             <label asp-for="@Model.StartRentDate">End Date</label>
             <input type="date" asp-for="@Model.EndRentDate" class="end-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
-                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
            <span asp-validation-for="@Model.EndRentDate"></span>
          </div>
         <button class="rent-btn" type="submit">Rent</button>
@@ -67,7 +67,7 @@
    const endDataInputElement = document.querySelector(".end-date");
    const startDateInputElement = document.querySelector(".start-date");
    endDataInputElement.addEventListener('change', () =>{
-       if(startDateInputElement.value >=endDataInputElement.value){
+       if(startDateInputElement.value >= endDataInputElement.value){
            document.querySelector(".order-info .total-price").textContent = '';
            return;
        }
@@ -83,5 +83,6 @@
        
    });
 </script>
+ <script src="~/js/account.js"></script>
 
   

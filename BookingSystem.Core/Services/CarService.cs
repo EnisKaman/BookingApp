@@ -120,7 +120,7 @@
             {
                 cars = cars.Where(rc => rc.Year <= carQuerViewModel.MaxYear);
             }
-            if (!string.IsNullOrWhiteSpace(carQuerViewModel.Brand))
+            if (!string.IsNullOrWhiteSpace(carQuerViewModel.Brand) && carQuerViewModel.Brand!="default")
             {
                 cars = cars.Where(rc => rc.MakeType.ToLower() == carQuerViewModel.Brand.ToLower());
             }

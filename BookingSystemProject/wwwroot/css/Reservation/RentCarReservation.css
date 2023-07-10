@@ -47,7 +47,7 @@ main {
 .input-container{
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  margin-bottom: 1rem;
 }
 .input-container input{
   margin-bottom: 1rem;
@@ -83,9 +83,9 @@ input[type = text]:focus:not([readonly]) {
   width: 50%;
 }
 .order-title{
-   font-size: 2.5rem;
-   text-align: center;
-   margin-bottom: 1.4rem;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
 }
 .order-info .img-container{
    width: 500px;
@@ -104,4 +104,11 @@ input[type = text]:focus:not([readonly]) {
 .order-info .price{
   font-size: 1.9rem;
   padding: 1rem;
+}
+.input-container label{
+  transition: 0.5s ease all;
+}
+.shift{
+  transform:translateY(-10px);
+  font-size: 1.1rem;
 }

@@ -14,7 +14,7 @@
             int startPage = Math.Max(1, currentPage - 2);
             int endPage = Math.Min(startPage + 3, totalPages);
 
-            if(currentPage > endPage)
+            if(currentPage > endPage && endPage != 0)
             {
                 currentPage = endPage;
                 startPage = Math.Max(1, currentPage - 3);

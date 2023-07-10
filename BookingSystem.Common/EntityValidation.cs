@@ -102,5 +102,16 @@
             public const int NameMinLength = 4;
             public const int NameMaxLength = 20;
         }
+        public static class ReservationCarEntity
+        {
+            public const int MinYear = 2000;
+            public const int MaxYear = 2023;
+
+            public const double DoorsMinCount = 2;
+            public const double DoorsMaxCount = 6;
+
+            public const string MinPriceAsDecimal = "10";
+            public const string MaxPriceAsDecimal = "100000";
+        }
     }
 }
