@@ -119,6 +119,9 @@ header {
 .car-name, .price, .car-year{
    font-size: 1.4rem;
 }
+.cars-container{
+   padding: 1.2rem;
+}
 .cars-container .card .btn-container a {
   display: inline-block;
   text-decoration: none;
@@ -160,7 +163,8 @@ header {
 .form-container select{
    color: dimgrey;
    padding: 0.4rem;
-   margin-top: 0.5rem;
+   margin-top: 0.9rem;
+   border: 1px solid black;
 }
 .form-container button {
   padding: 5px 14px;
@@ -224,12 +228,14 @@ header {
 .filter-container .container input, .filter-container .container select{
   padding: 0.3rem 0.4rem;
   margin-bottom: 1rem;
+  border: 1px solid black;
 }
 .filter-container span{
   color: red;
   font-size: 1.2rem;
   margin: 1.1rem 0rem;
 }
+
 .filter-btn{
   margin-top: 1.1rem;
   font-size: 1.1rem;
