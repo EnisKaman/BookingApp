@@ -40,5 +40,20 @@
 
             return hotels;
         }
+        public async Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync()
+        {
+            IEnumerable<HotelViewModel> hotels = await bookingContext.Hotels
+                  .Where(h => !h.IsDeleted)
+                  .Select(h => new HotelViewModel()
+                  {
+                      Id = h.Id,
+                      Name = h.Name,
+                      StarRating = h.StarRating,
+                      City = h.City,
+                      Country = h.Country,
+                      PicturePath = h.Pictures.First().Path
+                  }).ToArrayAsync();
+            return hotels;
+        }
     }
 }

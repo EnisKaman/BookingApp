@@ -1,6 +1,7 @@
 ﻿namespace BookingSystem.Controllers
 {
     using BookingSystem.Core.Contracts;
+    using BookingSystem.Core.Models.Hotel;
     using Microsoft.AspNetCore.Mvc;
     public class HotelController : Controller
     {
@@ -10,9 +11,10 @@
             this.hotelService = hotelService;
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            return View();
+            IEnumerable<HotelViewModel> allHotels = await hotelService.GetAllHotelsAsync();
+            return View(allHotels);
         }
     }
 }

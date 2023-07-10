@@ -76,7 +76,7 @@
 
         public async Task<AllCarsSortedAndFilteredDataModel> AllCarsSortedAndFilteredDataModelAsync(CarQuerViewModel carQuerViewModel)
         {
-            IQueryable<RentCar> cars = bookingContext.RentCars.AsQueryable();
+            IQueryable<RentCar> cars = bookingContext.RentCars .Where(rc => !rc.IsDeleted).AsQueryable();
             cars = FilterCars(carQuerViewModel, cars);
             int recordsToSkip = (carQuerViewModel.Pager.CurrentPage - 1) * carQuerViewModel.Pager.PageSize;
             IEnumerable<CarViewModel> carViewModels = await cars
@@ -96,6 +96,21 @@
             {
                 Cars = carViewModels
             };
+        }
+
+        public async Task<int> GetCarsCountAsync(CarQuerViewModel model)
+        {
+            IQueryable<RentCar> cars = bookingContext.RentCars .Where(rc => !rc.IsDeleted).AsQueryable();
+            cars = FilterCars(model, cars);
+
+            return await cars.CountAsync();
+        }
+
+        public async Task<IEnumerable<string>> GetAllBrandsAsync()
+        {
+            IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
+                .ToArrayAsync();
+            return brands;
         }
 
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
@@ -120,7 +135,7 @@
             {
                 cars = cars.Where(rc => rc.Year <= carQuerViewModel.MaxYear);
             }
-            if (!string.IsNullOrWhiteSpace(carQuerViewModel.Brand) && carQuerViewModel.Brand!="default")
+            if (!string.IsNullOrWhiteSpace(carQuerViewModel.Brand) && carQuerViewModel.Brand != "default")
             {
                 cars = cars.Where(rc => rc.MakeType.ToLower() == carQuerViewModel.Brand.ToLower());
             }
@@ -155,21 +170,6 @@
             }
 
             return cars;
-        }
-
-        public async Task<int> GetCarsCountAsync(CarQuerViewModel model)
-        {
-            IQueryable<RentCar> cars = bookingContext.RentCars.AsQueryable();
-            cars = FilterCars(model, cars);
-
-            return await cars.CountAsync();
-        }
-
-        public async Task<IEnumerable<string>> GetAllBrandsAsync()
-        {
-            IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
-                .ToArrayAsync();
-            return brands;
         }
     }
 }
