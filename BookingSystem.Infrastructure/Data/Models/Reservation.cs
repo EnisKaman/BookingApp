@@ -5,8 +5,12 @@
     using static Common.EntityValidation.ReservationEntity;
     public class Reservation
     {
+        public Reservation()
+        {
+            Id = Guid.NewGuid();
+        }
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int CountNights { get; set; }
         [ForeignKey(nameof(Room))]
         public int? RoomId { get; set; }

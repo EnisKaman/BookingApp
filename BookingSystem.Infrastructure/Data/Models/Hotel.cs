@@ -13,6 +13,7 @@
             HotelBenefits = new List<HotelBenefits>();
             Comments = new List<Comment>();
             Reservations = new List<Reservation>();
+            FavoriteHotels = new List<FavoriteHotel>();
         }
         [Key]
         public int Id { get; set; }
@@ -41,5 +42,6 @@
         public List<HotelBenefits> HotelBenefits { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<FavoriteHotel> FavoriteHotels { get; set; }
     }
 }

@@ -7,6 +7,10 @@
 {
     <script>toastr.success('@TempData[SuccessMessage]')</script>
 }
+@if(TempData.ContainsKey(WarningMessage))
+{
+    <script>toastr.warning('@TempData[WarningMessage]')</script>
+}
 @*To load JQuery*@
 @section Scripts
 {

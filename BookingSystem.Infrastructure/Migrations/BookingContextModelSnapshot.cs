@@ -144,28 +144,17 @@ namespace BookingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.FavoriteHotel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "HotelId");
 
                     b.HasIndex("HotelId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FavoriteHotels");
+                    b.ToTable("FavoriteHotel");
                 });
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotel", b =>
@@ -264,7 +253,7 @@ namespace BookingSystem.Infrastructure.Migrations
                             IsFavorite = false,
                             Latitude = 45.48175408930197m,
                             Longitude = 9.1916942539707m,
-                            Name = "Hotel NH Collection Milano Porta Nuova",
+                            Name = "NH Collection Milano Porta Nuova",
                             StarRating = 4
                         },
                         new
@@ -661,7 +650,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 25,
-                            Path = "/img/Rooms/Spa hotel Infinity rooms/Spa hotel Infinity rooms/Spa Hotel Infinity house2.jpg",
+                            Path = "/img/Rooms/Spa hotel Infinity rooms/Spa Hotel Infinity house2.jpg",
                             RoomId = 7
                         },
                         new
@@ -775,7 +764,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 44,
-                            Path = "/img/Rooms/Porta Nuova rooms/Porta Nuova aapartment2.jpg",
+                            Path = "/img/Rooms/Porta Nuova rooms/Porta Nuova apartment2.jpg",
                             RoomId = 13
                         },
                         new
@@ -805,13 +794,13 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 49,
-                            Path = "/img/Rooms//Paradise rooms/Paradise doublebed1.jpg",
+                            Path = "/img/Rooms/Paradise rooms/Paradise doublebed1.jpg",
                             RoomId = 14
                         },
                         new
                         {
                             Id = 50,
-                            Path = "/img/Rooms//Paradise rooms/Paradise doublebed2.jpg",
+                            Path = "/img/Rooms/Paradise rooms/Paradise double bed2.jpg",
                             RoomId = 14
                         },
                         new
@@ -823,19 +812,19 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 52,
-                            Path = "/img/Rooms/Paradise rooms/Paradise stuido2.jpg",
+                            Path = "/img/Rooms/Paradise rooms/Paradise studio2.jpg",
                             RoomId = 15
                         },
                         new
                         {
                             Id = 53,
-                            Path = "/img/Rooms/Paradise rooms/Paradise stuido3.jpg",
+                            Path = "/img/Rooms/Paradise rooms/Paradise studio3.jpg",
                             RoomId = 15
                         },
                         new
                         {
                             Id = 54,
-                            Path = "/img/Rooms/Paradise rooms/Paradise stuido4.jpg",
+                            Path = "/img/Rooms/Paradise rooms/Paradise stuido 4.jpg",
                             RoomId = 15
                         },
                         new
@@ -854,19 +843,19 @@ namespace BookingSystem.Infrastructure.Migrations
                         {
                             Id = 57,
                             HotelId = 6,
-                            Path = "/Hotels/Hotel Amelia/Hotel Amelia1.jpg"
+                            Path = "/img/Hotels/Hotel Amelia/Hotel Amelia1.jpg"
                         },
                         new
                         {
                             Id = 58,
                             HotelId = 6,
-                            Path = "/Hotels/Hotel Amelia/Hotel Amelia2.jpg"
+                            Path = "/img/Hotels/Hotel Amelia/Hotel Amelia2.jpg"
                         },
                         new
                         {
                             Id = 59,
                             HotelId = 6,
-                            Path = "/Hotels/Hotel Amelia/Hotel Amelia3.jpg"
+                            Path = "/img/Hotels/Hotel Amelia/Hotel Amelia3.jpg"
                         },
                         new
                         {
@@ -921,6 +910,12 @@ namespace BookingSystem.Infrastructure.Migrations
                             Id = 68,
                             Path = "/img/Rooms//Amelia rooms/Amelia double bed delux4.jpg",
                             RoomId = 19
+                        },
+                        new
+                        {
+                            Id = 69,
+                            HotelId = 4,
+                            Path = "/img/Hotels/NH Collection Milano Porta Nuova/Porta Nuova2.jpg"
                         });
                 });
 
@@ -944,9 +939,6 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.Property<double>("FuelConsumption")
                         .HasColumnType("float");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -977,9 +969,6 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ReservationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TransmissionType")
                         .HasColumnType("int");
 
@@ -987,8 +976,6 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReservationId");
 
                     b.ToTable("RentCars");
 
@@ -1000,7 +987,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 85.0,
                             FuelConsumption = 13.4,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1019,7 +1005,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 60.0,
                             FuelConsumption = 13.4,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1034,11 +1019,10 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CarImg = "/img/Cars/Bmw X3 2018.jpg",
+                            CarImg = "/img/Cars/Bmw X1 2015.jpg",
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 6.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1057,7 +1041,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 6.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1076,7 +1059,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 53.0,
                             FuelConsumption = 4.2000000000000002,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1095,7 +1077,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 4.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1114,7 +1095,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 4.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1133,7 +1113,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 35.0,
                             FuelConsumption = 4.9000000000000004,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1152,7 +1131,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 30.0,
                             FuelConsumption = 4.4000000000000004,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1167,11 +1145,10 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            CarImg = "/img/Cars/Mercedes C63 2012.jpg",
+                            CarImg = "/img/Cars/Mercedes GLE 2016.jpg",
                             DoorsCount = 4,
                             FuelCapacity = 93.0,
                             FuelConsumption = 7.2000000000000002,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1190,7 +1167,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 78.0,
                             FuelConsumption = 4.7000000000000002,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1209,7 +1185,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 67.0,
                             FuelConsumption = 5.9000000000000004,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1228,7 +1203,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 75.0,
                             FuelConsumption = 5.2000000000000002,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1247,7 +1221,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 60.0,
                             FuelConsumption = 4.7000000000000002,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1266,7 +1239,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 5.0999999999999996,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1285,7 +1257,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 60.0,
                             FuelConsumption = 13.4,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1300,11 +1271,10 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            CarImg = "/img/Cars/BmwX6 Blue.jpeg",
+                            CarImg = "/img/Cars/BmwX6 Black.jpg",
                             DoorsCount = 4,
                             FuelCapacity = 85.0,
                             FuelConsumption = 13.4,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.700866541296215m,
                             Location = "Sofia",
@@ -1319,11 +1289,10 @@ namespace BookingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            CarImg = "/img/Cars/BmwX6 Blue.jpeg",
+                            CarImg = "/img/Cars/Bmw X6 2021 Maroon.jpg",
                             DoorsCount = 4,
                             FuelCapacity = 85.0,
                             FuelConsumption = 13.4,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 45.43995264548058m,
                             Location = "Milano",
@@ -1342,7 +1311,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 4.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 45.43995264548058m,
                             Location = "Milano",
@@ -1361,7 +1329,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 50.0,
                             FuelConsumption = 4.7999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 45.43995264548058m,
                             Location = "Milano",
@@ -1380,7 +1347,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 35.0,
                             FuelConsumption = 4.9000000000000004,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 45.43995264548058m,
                             Location = "Milano",
@@ -1399,7 +1365,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 30.0,
                             FuelConsumption = 4.4000000000000004,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 45.43995264548058m,
                             Location = "Milano",
@@ -1418,7 +1383,6 @@ namespace BookingSystem.Infrastructure.Migrations
                             DoorsCount = 4,
                             FuelCapacity = 93.0,
                             FuelConsumption = 7.2999999999999998,
-                            IsAvailable = true,
                             IsDeleted = false,
                             Lattitude = 42.026543162263934m,
                             Location = "Velingrad",
@@ -1434,11 +1398,9 @@ namespace BookingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Reservation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CountNights")
                         .HasColumnType("int");
@@ -1456,7 +1418,7 @@ namespace BookingSystem.Infrastructure.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int>("HotelId")
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -1467,11 +1429,17 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<int>("PeopleCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int?>("RentCarId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -1479,6 +1447,8 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HotelId");
+
+                    b.HasIndex("RentCarId");
 
                     b.HasIndex("RoomId");
 
@@ -2808,15 +2778,15 @@ namespace BookingSystem.Infrastructure.Migrations
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.FavoriteHotel", b =>
                 {
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotel", "Hotel")
-                        .WithMany()
+                        .WithMany("FavoriteHotels")
                         .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.User", "User")
                         .WithMany("FavoriteHotels")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Hotel");
@@ -2860,28 +2830,21 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.RentCar", b =>
-                {
-                    b.HasOne("BookingSystem.Infrastructure.Data.Models.Reservation", "Reservation")
-                        .WithMany("Cars")
-                        .HasForeignKey("ReservationId");
-
-                    b.Navigation("Reservation");
-                });
-
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Reservation", b =>
                 {
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.Hotel", "Hotel")
-                        .WithMany()
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Reservations")
+                        .HasForeignKey("HotelId");
+
+                    b.HasOne("BookingSystem.Infrastructure.Data.Models.RentCar", "RentCar")
+                        .WithMany("Reservations")
+                        .HasForeignKey("RentCarId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.Room", "Room")
                         .WithMany("Reservations")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("BookingSystem.Infrastructure.Data.Models.User", "User")
                         .WithMany("Reservations")
@@ -2890,6 +2853,8 @@ namespace BookingSystem.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+
+                    b.Navigation("RentCar");
 
                     b.Navigation("Room");
 
@@ -3002,16 +2967,20 @@ namespace BookingSystem.Infrastructure.Migrations
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("FavoriteHotels");
+
                     b.Navigation("HotelBenefits");
 
                     b.Navigation("Pictures");
 
+                    b.Navigation("Reservations");
+
                     b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Reservation", b =>
+            modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.RentCar", b =>
                 {
-                    b.Navigation("Cars");
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Room", b =>

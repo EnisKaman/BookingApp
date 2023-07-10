@@ -33,13 +33,13 @@
         <div class="input-container">
             <label asp-for="@Model.StartRentDate">Start Date</label>
             <input type="date" asp-for="@Model.StartRentDate" class="start-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" 
-            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
             <span asp-validation-for="@Model.StartRentDate"></span>
         </div>
          <div class="input-container">
             <label asp-for="@Model.StartRentDate">End Date</label>
             <input type="date" asp-for="@Model.EndRentDate" class="end-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
-            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" max="@DateTime.UtcNow.AddYears(1)">
+            value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
            <span asp-validation-for="@Model.EndRentDate"></span>
          </div>
         <button class="rent-btn" type="submit">Rent</button>

@@ -6,5 +6,6 @@
     {
         Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync();
         Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync();
+        Task<bool> IsExist(int hotelId);
     }
 }

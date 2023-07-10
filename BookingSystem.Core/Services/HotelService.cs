@@ -55,5 +55,11 @@
                   }).ToArrayAsync();
             return hotels;
         }
+
+        public async Task<bool> IsExist(int hotelId)
+        {
+            return await bookingContext.Hotels
+                  .AnyAsync(rc => rc.Id == hotelId);
+        }
     }
 }
