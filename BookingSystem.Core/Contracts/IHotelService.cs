@@ -5,7 +5,9 @@
     public interface IHotelService
     {
         Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync();
-        Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync();
+        Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync(Guid userId);
         Task<bool> IsExist(int hotelId);
+        Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId);
+        Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId);
     }
 }

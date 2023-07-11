@@ -154,7 +154,7 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("FavoriteHotel");
+                    b.ToTable("FavoriteHotels");
                 });
 
             modelBuilder.Entity("BookingSystem.Infrastructure.Data.Models.Hotel", b =>
