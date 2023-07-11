@@ -3,6 +3,7 @@
     using BookingSystem.Core.Contracts;
     using BookingSystem.Core.Models.Hotel;
     using BookingSystem.Extensions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
@@ -13,22 +14,57 @@
         {
             this.hotelService = hotelService;
         }
-
+        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> All()
         {
-            IEnumerable<HotelViewModel> allHotels = await hotelService.GetAllHotelsAsync();
+            Guid userId = User.GetId();
+            IEnumerable<HotelViewModel> allHotels = await hotelService.GetAllHotelsAsync(userId);
             return View(allHotels);
         }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddToFavorite(int id)
         {
-            Guid userId = User.GetId();
-            if(!await hotelService.IsExist(id))
+            if (!await hotelService.IsExist(id))
             {
                 TempData[ErrorMessage] = HotelDoesNotExist;
                 return RedirectToAction(nameof(All));
             }
-            return View();
-            
+            try
+            {
+                await hotelService.AddHotelToUserFavoriteHotels(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyAddHotelToUserFavorites;
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
+
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromFavorite(int id)
+        {
+            if (!await hotelService.IsExist(id))
+            {
+                TempData[ErrorMessage] = HotelDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+            try
+            {
+                await hotelService.RemoveHotelFromUserFavoriteHotels(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyRemoveHotelFromUserFavoriteHotels;
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
         }
     }
 }

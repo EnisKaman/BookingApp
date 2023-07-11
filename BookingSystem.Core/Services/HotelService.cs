@@ -7,6 +7,8 @@
     using BookingSystemProject.Data;
     using Microsoft.EntityFrameworkCore;
     using Core.Models.Picture;
+    using System;
+    using BookingSystem.Infrastructure.Data.Models;
 
     public class HotelService : IHotelService
     {
@@ -40,7 +42,7 @@
 
             return hotels;
         }
-        public async Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync()
+        public async Task<IEnumerable<HotelViewModel>> GetAllHotelsAsync(Guid userId)
         {
             IEnumerable<HotelViewModel> hotels = await bookingContext.Hotels
                   .Where(h => !h.IsDeleted)
@@ -51,7 +53,8 @@
                       StarRating = h.StarRating,
                       City = h.City,
                       Country = h.Country,
-                      PicturePath = h.Pictures.First().Path
+                      PicturePath = h.Pictures.First().Path,
+                      IsFavorite = h.FavoriteHotels.Any(fv => fv.HotelId == h.Id && fv.UserId == userId)
                   }).ToArrayAsync();
             return hotels;
         }
@@ -60,6 +63,25 @@
         {
             return await bookingContext.Hotels
                   .AnyAsync(rc => rc.Id == hotelId);
+        }
+
+        public async Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId)
+        {
+            FavoriteHotel favoriteHotel = new FavoriteHotel()
+            {
+                HotelId = hotelId,
+                UserId = userId
+            };
+            await bookingContext.FavoriteHotels.AddAsync(favoriteHotel);
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId)
+        {
+            FavoriteHotel favoriteHotelToRemove = await bookingContext
+                .FavoriteHotels.FirstAsync(fh => fh.UserId == userId && fh.HotelId == hotelId);
+            bookingContext.FavoriteHotels.Remove(favoriteHotelToRemove);
+            await bookingContext.SaveChangesAsync();
         }
     }
 }
