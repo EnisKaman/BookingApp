@@ -4,6 +4,7 @@
   outline: none;
   padding: 0px;
   margin: 0px;
+  box-sizing: border-box;
 }
 body{
     margin: 0px;

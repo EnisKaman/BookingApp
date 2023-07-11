@@ -9,5 +9,7 @@
         Task<bool> IsExist(int hotelId);
         Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId);
         Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId);
+        Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId);
+
     }
 }

@@ -9,6 +9,8 @@
     using Core.Models.Picture;
     using System;
     using BookingSystem.Infrastructure.Data.Models;
+    using BookingSystem.Core.Models.Beefit;
+    using BookingSystem.Core.Models.Comment;
 
     public class HotelService : IHotelService
     {
@@ -82,6 +84,37 @@
                 .FavoriteHotels.FirstAsync(fh => fh.UserId == userId && fh.HotelId == hotelId);
             bookingContext.FavoriteHotels.Remove(favoriteHotelToRemove);
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId)
+        {
+            HotelInfoViewModel hotel = await bookingContext
+                 .Hotels
+                 .Select(h => new HotelInfoViewModel()
+                 {
+                     Id = h.Id,
+                     City = h.City,
+                     Country = h.Country,
+                     Name = h.Name,
+                     Description = h.Description,
+                     StarRating = h.StarRating,
+                     Benefits = h.HotelBenefits.Where(b => b.HotelId == hotelId).Select(b => new BenefitViewModel()
+                     {
+                         Name = b.Benefit.Name,
+                         BenefitIcon = b.Benefit.ClassIcon
+                     }).ToArray(),
+                     Pictures = h.Pictures.Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
+                     Comments = h.Comments.Select(c => new CommentViewModel()
+                     {
+                         CreatedOn = c.CreatedDate,
+                         Description = c.Description,
+                         UserName = c.UserName
+                         //UserPicturePath = c.User.PicturePath
+
+                     })
+                 }).FirstAsync(h => h.Id == hotelId);
+            return hotel;
+
         }
     }
 }

@@ -66,5 +66,17 @@
                 return RedirectToAction(nameof(All));
             }
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Info(int id)
+        {
+            if(!await hotelService.IsExist(id))
+            {
+                TempData[ErrorMessage] = HotelDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+            HotelInfoViewModel hotel = await hotelService.GetHotelByIdAsync(id);
+            return View(hotel);
+        }
     }
 }
